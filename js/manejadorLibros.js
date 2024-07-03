@@ -196,7 +196,6 @@ export class Libro {
     }
 }
 
-
 // Función para guardar el array de libros en el localStorage
 export function guardarLibrosEnLocalStorage(libros) {
     const librosJSON = libros.map(libro => libro.toJSON());
@@ -285,6 +284,5 @@ export function modificacionLibro(libroModificado) {
         console.log(`No se encontró ningún libro con el ID ${libroModificado.id}.`);
     }
 }
-
 
 export * from './manejadorLibros.js';
