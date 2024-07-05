@@ -16,7 +16,7 @@ export function protegerRuta(deslogueado, miembro, admin) {
                 main.style.display = 'block';
                 return true;
             } else {
-                location.href = '../pages/inicio-sesion.html';
+                location.href = '../pages/registro.html';
             }
             break;
 
@@ -25,7 +25,7 @@ export function protegerRuta(deslogueado, miembro, admin) {
                 main.style.display = 'block';
                 return true;
             } else {
-                location.href = '../pages/inicio-sesion.html';
+                location.href = '../pages/registro.html';
             }
             break;
 
@@ -34,7 +34,7 @@ export function protegerRuta(deslogueado, miembro, admin) {
                 main.style.display = 'block';
                 return true;
             } else {
-                location.href = '../pages/inicio-sesion.html';
+                location.href = '../pages/registro.html';
             }
             break;
 
