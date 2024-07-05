@@ -1,7 +1,7 @@
 import * as UsuariosModule from './manejadorUsuarios.js';
-//import * as RutasProtegidassModule from './rutasProtegidas.js';
+import * as RutasProtegidassModule from './rutasProtegidas.js';
 
-//RutasProtegidassModule.protegerRuta(true, true, true);
+RutasProtegidassModule.protegerRuta(true, true, true);
 
 const nombreUsuario = document.querySelector('#userName');
 const correoUsuario = document.querySelector('#userEmail');
