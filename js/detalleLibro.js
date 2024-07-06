@@ -1,7 +1,7 @@
 import * as librosModule from './manejadorLibros.js';
-//import * as RutasProtegidassModule from './rutasProtegidas.js';
+import * as RutasProtegidassModule from './rutasProtegidas.js';
 
-//RutasProtegidassModule.protegerRuta(false, true, true);
+RutasProtegidassModule.protegerRuta(false, true, true);
 
 function inicializar() {
     // Obtener el string de consulta de la URL
