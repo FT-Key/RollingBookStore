@@ -157,7 +157,7 @@ function registrarse(event) {
         usuarios.push(nuevoUsuario);
 
         UsuariosModule.guardarUsuariosEnLocalStorage(usuarios);
-        alert("Registro exitoso");
+        location.href = "./inicioSesion.html";
     }
 
 }
