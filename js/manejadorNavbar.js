@@ -294,7 +294,7 @@ export function inicializarNavbar() {
   const cerrarSesion = new NavbarLinkButton("Cerrar Sesión", function () {
     UsuariosModule.eliminarUsuarioDeSessionStorage();
     sessionStorage.removeItem('vistaMiembro');
-    location.reload();
+    location.href = "/pages/inicioSesion.html";
   });
 
   const cambiarVista = new NavbarLinkButton("Vista miembro", function () {
@@ -317,17 +317,29 @@ export function inicializarNavbar() {
 
   switch (true) {
     case usuario === null:
-      console.log("1");
+      
+     let iniSes;
+      if(window.location.pathname === "/index.html" ||  window.location.pathname === "/"){
+        iniSes = "./pages/inicioSesion.html";
+      } else {
+        iniSes = "../pages/inicioSesion.html";
+      }
 
-      const iniciarSesion = new NavbarLink("Iniciar Sesión", "pages/inicio-sesion.html");
-      const registrarse = new NavbarLink("Registrarse", "pages/registro.html");
+     let reg;
+      if(window.location.pathname === "/index.html" ||  window.location.pathname === "/"){
+        reg = "./pages/registro.html";
+      } else {
+        reg = "../pages/registro.html";
+      }
+
+      const iniciarSesion = new NavbarLink("Iniciar Sesión", iniSes);
+      const registrarse = new NavbarLink("Registrarse", reg);
       agregarElementoNavbar(iniciarSesion);
       agregarElementoNavbar(registrarse);
       agregarSearchNavbar();
       break;
 
     case usuario.role === "miembro" || usuario.role === "miembroTest":
-      console.log("2");
 
       agregarElementoNavbar(favoritos);
       agregarElementoNavbar(carrito);
@@ -340,7 +352,6 @@ export function inicializarNavbar() {
       break;
 
     case usuario.role === "admin":
-      console.log("3");
 
       const usuarios = new NavbarLink("Usuarios", "pages/adminUsuarios.html");
       const catalogo = new NavbarLink("Catalogo", "pages/adminCatalogo.html");
