@@ -21,7 +21,7 @@ export function protegerRuta(deslogueado, miembro, admin) {
             break;
 
         case !miembro && admin:
-            if (usuario && usuario.role === 'admin') {
+            if (usuario && (usuario.role === 'admin' || usuario.role === 'miembroTest')) {
                 main.style.display = 'block';
                 return true;
             } else {

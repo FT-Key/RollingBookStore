@@ -139,7 +139,7 @@ function iniciarSesion(event) {
         UsuariosModule.guardarUsuariosEnLocalStorage(usuarios);
 
         // Redirigir a inicio
-        location.href = '../index.html';
+        location.href = './inicio.html';
     }
 
 }
