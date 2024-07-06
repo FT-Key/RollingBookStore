@@ -1,7 +1,9 @@
 import * as UsuariosModule from './manejadorUsuarios.js';
 import * as RutasProtegidassModule from './rutasProtegidas.js';
+import * as NavbarModule from './manejadorNavbar.js';
 
 RutasProtegidassModule.protegerRuta(true, true, true);
+NavbarModule.inicializarNavbar();
 
 const divInicioSesion = document.querySelector('#inicio-sesion');
 

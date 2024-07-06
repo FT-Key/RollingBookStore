@@ -1,7 +1,9 @@
 import * as LibrosModule from './manejadorLibros.js';
 import * as RutasProtegidassModule from './rutasProtegidas.js';
+import * as NavbarModule from './manejadorNavbar.js';
 
 RutasProtegidassModule.protegerRuta(false, true, true);
+NavbarModule.inicializarNavbar();
 
 // Genera las cards de los libros
 export function generarCards() {
