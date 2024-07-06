@@ -1,7 +1,9 @@
 import * as librosModule from './manejadorLibros.js';
 import * as RutasProtegidassModule from './rutasProtegidas.js';
+import * as NavbarModule from './manejadorNavbar.js';
 
 RutasProtegidassModule.protegerRuta(false, true, true);
+NavbarModule.inicializarNavbar();
 
 function inicializar() {
     // Obtener el string de consulta de la URL

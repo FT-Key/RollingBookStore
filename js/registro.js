@@ -1,7 +1,9 @@
 import * as UsuariosModule from './manejadorUsuarios.js';
 import * as RutasProtegidassModule from './rutasProtegidas.js';
+import * as NavbarModule from './manejadorNavbar.js';
 
 RutasProtegidassModule.protegerRuta(true, true, true);
+NavbarModule.inicializarNavbar();
 
 const nombreUsuario = document.querySelector('#userName');
 const correoUsuario = document.querySelector('#userEmail');
@@ -11,6 +13,35 @@ const terminosYCondiciones = document.querySelector('#userCheck');
 const botonRegistro = document.querySelector('#botonRegistro');
 
 botonRegistro.addEventListener("click", registrarse);
+
+function comprobarInicioSesion() {
+    let usuario = UsuariosModule.recuperarUsuarioDeSessionStorage();
+
+    if (usuario) {
+
+        const divRegistro = document.querySelector('.registro');
+        const formRegistro = divRegistro.querySelector('form');
+
+        // Eliminar el formulario completo de registro
+        formRegistro.remove();
+
+        // Crear un elemento <strong> para aplicar negrita
+        const strongElement = document.createElement('strong');
+        strongElement.textContent = usuario.nombre;
+
+        // Crear el mensaje de sesión iniciada
+        const mensajeSesionIniciada = document.createElement('h1');
+        mensajeSesionIniciada.textContent = `Sesión iniciada como '`;
+
+        // Se agrega al h1 el texto en negrita <strong> seguido del ' final
+        mensajeSesionIniciada.appendChild(strongElement);
+        mensajeSesionIniciada.appendChild(document.createTextNode("'"));
+
+        // Agregar el mensaje al div
+        divRegistro.appendChild(mensajeSesionIniciada);
+
+    }
+}
 
 function registrarse(event) {
     
@@ -185,3 +216,5 @@ function validarCorreoElectronico(correo) {
     // Comprobar si el valor de correoUsuario cumple con la expresión regular
     return regex.test(correo);
 }
+
+comprobarInicioSesion();
