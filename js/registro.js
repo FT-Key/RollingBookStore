@@ -77,7 +77,7 @@ function registrarse(event) {
 
     } else if (!validarNombreUsuario(nombreUsuario.value)) {
 
-        patternIndications[0].setAttribute('title', 'El nombre de usuario debe contener una combinación de\nmayúsculas, minúsculas o numeros y un mínimo de 3 carácteres&#10;y máximo de 30');
+        patternIndications[0].setAttribute('title', 'El nombre de usuario debe contener\nentre 3 y 30 carácteres alfanuméricos');
         patternIndications[0].classList.remove('d-none');
         error = true;
 
@@ -95,7 +95,7 @@ function registrarse(event) {
 
     } else if (!validarCorreoElectronico(correoUsuario.value)) {
 
-        patternIndications[1].setAttribute('title', 'El correo debe contener una combinación de\nmayúsculas o minúsculas y numeros y un mínimo&#10;de 3 carácteres y máximo de 40.');
+        patternIndications[1].setAttribute('title', 'El correo debe contener\nentre 3 y 30 carácteres con formato de email');
         patternIndications[1].classList.remove('d-none');
         error = true;
 
@@ -113,7 +113,7 @@ function registrarse(event) {
 
     } else if (!validarContraseniaUsuario(contraseñaUsuario.value)) {
 
-        patternIndications[2].setAttribute('title', 'La contraseña debe contener una combinación de\nmayúsculas, minúsculas y numeros y un mínimo de 6 carácteres&#10;y máximo de 30');
+        patternIndications[2].setAttribute('title', 'La contraseña debe contener\nentre 3 y 30 carácteres alfanuméricos\ncon al menos una mayúscula y un número');
         patternIndications[2].classList.remove('d-none');
         error = true;
 

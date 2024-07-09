@@ -1,17 +1,4 @@
-*{
-    margin: 0;
-    padding: 0;
-
-    --color-dinero: #4CAF50;
-    --color-fondo: #f0f0f0;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    min-height: 100vh;
-    margin: 0;
-    background-color: var(--color-fondo);
-}
+@import url('./variables.css');
 
 .container-principal{
     display: flex;
@@ -22,15 +9,16 @@ body {
 
 .container-producto {
     display: flex;
-    flex-direction: column;
+    justify-content:space-around;
+    align-items: center;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
     width: 100%;
 }
 
 .producto-img {
+    max-width: 400px;
     width: 100%;
     border-radius: 10px;
     aspect-ratio: 5/8;
@@ -50,7 +38,6 @@ body {
 
 .producto-descripcion {
     font-size: 16px;
-    color: #555;
     margin-bottom: 20px;
 }
 

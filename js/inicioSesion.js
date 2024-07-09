@@ -45,7 +45,7 @@ function iniciarSesion(event) {
     const nombreUsuario = divInicioSesion.querySelector('#userName');
     const contraseñaUsuario = divInicioSesion.querySelector('#userPass');
     const recordarme = divInicioSesion.querySelector('#userCheck');
-    let patternIndications = document.querySelectorAll('abbr');
+    let patternIndications = divInicioSesion.querySelectorAll('abbr');
 
     // Declaro las variables que se usaran en la lógica del a función
     let usuarios = UsuariosModule.recuperarUsuariosDeLocalStorage();
@@ -73,7 +73,7 @@ function iniciarSesion(event) {
 
     } else if (!validarNombreUsuario(nombreUsuario.value)) {
 
-        boundSetError(0, 'El nombre de usuario debe contener una combinación de\nmayúsculas, minúsculas o numeros y un mínimo de 3 carácteres&#10;y máximo de 30');
+        boundSetError(0, 'El nombre de usuario debe contener\nentre 3 y 30 carácteres alfanuméricos');
 
     } else {
         setValid(nombreUsuario);
@@ -86,7 +86,7 @@ function iniciarSesion(event) {
 
     } else if (!validarContraseniaUsuario(contraseñaUsuario.value)) {
 
-        boundSetError(1, 'El nombre de usuario debe contener una combinación de\nmayúsculas, minúsculas y numeros y un mínimo de 3 carácteres&#10;y máximo de 30');
+        boundSetError(1, 'La contraseña debe contener\nentre 3 y 30 carácteres alfanuméricos\ncon al menos una mayúscula y un número');
 
     } else {
         setValid(contraseñaUsuario);
@@ -133,8 +133,6 @@ function iniciarSesion(event) {
 
         usuarios[indexUsuario] = usuario;
 
-        alert(`Bienvenido ${usuario.nombre}!`);
-
         // Lógica de inicio de sesión
 
         UsuariosModule.guardarUsuarioEnSessionStorage(usuario);
@@ -179,18 +177,3 @@ function validarContraseniaUsuario(nombreUsuario) {
 }
 
 comprobarInicioSesion();
-
-// Testeos
-
-export function agregarUsuarioNuevo() {
-    let usuarioNuevo = new UsuariosModule.Usuario(1, "Franco123", "franco@gmail.com", "Abcd123", "admin", true)
-    let usuarios = UsuariosModule.recuperarUsuariosDeLocalStorage();
-    usuarios.push(usuarioNuevo);
-
-    UsuariosModule.guardarUsuariosEnLocalStorage(usuarios);
-}
-
-// Asignar la función al objeto global window
-window.agregarUsuarioNuevo = agregarUsuarioNuevo;
-/* window.recuperarUsuarioDeSessionStorage = UsuariosModule.recuperarUsuarioDeSessionStorage; */
-/* window.eliminarUsuarioDeSessionStorage = UsuariosModule.eliminarUsuarioDeSessionStorage; */
