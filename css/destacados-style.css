@@ -1,0 +1,6 @@
+#container-destacados{
+    h1{
+        cursor: default;
+        user-select: none;
+    }
+}

@@ -33,7 +33,6 @@ function inicializar() {
             <p class="producto-paginas"><strong>Páginas:</strong> <span></span></p>
             <p class="producto-genero"><strong>Género:</strong> <span></span></p>
             <p class="producto-idioma"><strong>Idioma:</strong> <span></span></p>
-            <p class="producto-tipo"><strong>Tipo:</strong> <span></span></p>
             <p class="producto-stock"><strong>Stock:</strong> <span></span></p>
             <div class="botones">
                 <button class="btn favoritos">Agregar a Favoritos</button>
@@ -53,7 +52,6 @@ function inicializar() {
         const paginas = containerProducto.querySelector('.producto-paginas span');
         const genero = containerProducto.querySelector('.producto-genero span');
         const idioma = containerProducto.querySelector('.producto-idioma span');
-        const tipo = containerProducto.querySelector('.producto-tipo span');
         const stock = containerProducto.querySelector('.producto-stock span');
 
         if (producto) {
@@ -69,7 +67,6 @@ function inicializar() {
             paginas.textContent = producto.numeroPaginas;
             genero.textContent = producto.genero;
             idioma.textContent = producto.idioma;
-            tipo.textContent = producto.tipo;
             stock.textContent = producto.stock;
         } else {
            // window.location.href = `./404.html`;

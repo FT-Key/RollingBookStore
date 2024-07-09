@@ -238,14 +238,17 @@ export function agregarNavbar() {
   if (!header) {
     const body = document.querySelector('body');
     header = document.createElement('header');
+    header.classList.add("sticky-top");
     body.insertBefore(header, body.firstChild); // Insertar el nuevo header al inicio del body
+  } else if (!header.classList.contains("sticky-top")) {
+    header.classList.add("sticky-top");
   }
 
   let estructuraNavbar = `
         <!-- NAVBAR -->
-        <nav class="navbar navbar-expand-md bg-body-secondary">
+        <nav class="navbar navbar-expand-md navbar-dark bg-navbar border-body" id="navbar">
             <div class="container-fluid">
-                <a class="navbar-brand" href="${(window.location.pathname === "/index.html" ||  window.location.pathname === "/" ) ? "#" : "../index.html"}">Navbar</a>
+                <a class="navbar-brand" href="${(window.location.pathname === "/index.html" || window.location.pathname === "/") ? "#" : "../index.html"}">Navbar</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -317,16 +320,16 @@ export function inicializarNavbar() {
 
   switch (true) {
     case usuario === null:
-      
-     let iniSes;
-      if(window.location.pathname === "/index.html" ||  window.location.pathname === "/"){
+
+      let iniSes;
+      if (window.location.pathname === "/index.html" || window.location.pathname === "/") {
         iniSes = "./pages/inicioSesion.html";
       } else {
         iniSes = "../pages/inicioSesion.html";
       }
 
-     let reg;
-      if(window.location.pathname === "/index.html" ||  window.location.pathname === "/"){
+      let reg;
+      if (window.location.pathname === "/index.html" || window.location.pathname === "/") {
         reg = "./pages/registro.html";
       } else {
         reg = "../pages/registro.html";
@@ -362,7 +365,7 @@ export function inicializarNavbar() {
       agregarSearchNavbar();
       break;
 
-    default:  
+    default:
       console.log("No se ha iniciado sesión.");
       break;
   }
