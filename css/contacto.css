@@ -1,0 +1,77 @@
+main {
+    
+        font-family: Arial, sans-serif;
+        background-color: #516C65;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+        box-sizing: border-box;
+    
+      form {
+        background: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        width: 100%;
+        max-width: 400px;
+        box-sizing: border-box;
+      }
+      
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: bold;
+      }
+      
+      input, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      
+      button {
+        width: 100%;
+        padding: 15px;
+        background: #007BFF;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+      
+      button:hover {
+        background: #0056b3;
+      }
+      
+}
+@media (min-width: 1024px) {
+    main {
+        background-image: url('https://observandoelparaiso.wordpress.com/wp-content/uploads/2013/01/biblioteca-angelica-roma.png?w=584');
+        background-size: cover;
+        background-position: center;
+    }
+    
+}
+@media (min-width: 768px) {
+    main {
+        form {
+            padding: 30px;
+        }
+      
+        input, textarea {
+            padding: 12px;
+        }
+      
+        button {
+            padding: 18px;
+            font-size: 1.1rem;
+        }
+    }
+  }
