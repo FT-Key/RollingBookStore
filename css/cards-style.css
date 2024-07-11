@@ -1,0 +1,121 @@
+@import url('slider.css');
+@import url('variables.css');
+.contenedor-inicio {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-productos {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    max-width: 2000px;
+
+    .row {
+
+        .col {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .card {
+                height: 100%;
+            }
+        }
+    }
+}
+
+.card {
+    width: 18rem;
+    width: 85%;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 0px 5px black;
+
+    img {
+        aspect-ratio: 5/8;
+        max-width: 100%;
+        object-fit: cover;
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        background: var(--color-0);
+        padding: 5px 5px 10px 10px;
+
+        abbr{
+            text-decoration: none;
+            cursor: text;
+        }
+        
+        .card-title {
+            text-align: center;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            line-clamp: 1;
+            height: 1.75rem;
+            /* Ajusta este valor dependiendo de la altura de línea y el tamaño de fuente en este caso es un h5 por lo que será 1.25rem así que agrego un poco mas para que no corte las letras */
+            line-height: 1.65rem;
+            font-size: 1.5rem;
+            text-overflow: ellipsis;
+        }
+
+        .card-text {
+            margin: 0;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            height: calc(1em * 3);
+            /* Ajusta este valor dependiendo de la altura de línea y el tamaño de fuente */
+            line-height: 0.98em;
+            text-overflow: ellipsis;
+        }
+
+        .card-price {
+            text-align: center;
+            font-size: 1.5rem;
+            padding: 5px 0;
+            font-weight: bold;
+            color: var(--color-dinero);
+            margin: 0;
+        }
+
+        .btn {
+            width: 75%;
+            align-self: center;
+        }
+
+        @media screen and (min-width: 576px) {
+            .card-title {
+                height: 1.5rem;
+                line-height: 1.25rem;
+                font-size: initial;
+            }
+            
+            .card-price {
+                font-size: initial;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 576px) {
+    .card {
+
+        .card-body {
+
+            .card-title {
+                text-align: start;
+            }
+        }
+    }
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrarse</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/estilosGenerales.css" />
+    <link rel="stylesheet" href="../css/formulario-style.css" />
+  </head>
+
+  <body>
+    <header></header>
+
+    <main>
+      <h1 class="text-center pt-4">Registrarse</h1>
+      <div class="registro px-3">
+        <form>
+          <div class="contenedor-input mb-2 mt-5">
+            <label for="userName" class="form-label">Nombre de Usuario</label>
+            <input
+              type="text"
+              class="form-control"
+              id="userName"
+              aria-describedby="nameHelp"
+              required
+              placeholder=""
+              pattern="^(?=.*[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ])[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\d\-_\.]{3,30}$"
+              autocomplete="on"
+            />
+            <abbr title="" class="d-none">
+              <div class="signo-interrogacion">?</div>
+            </abbr>
+          </div>
+
+          <div class="contenedor-input mb-2 mt-5">
+            <label for="userEmail" class="form-label">Correo electrónico</label>
+            <input
+              type="email"
+              class="form-control"
+              id="userEmail"
+              aria-describedby="emailHelp"
+              required
+              placeholder=""
+              pattern="^[a-zA-Z0-9_]{3,40}@[a-zA-Z0-9_]+\.[a-zA-Z0-9]+$"
+            />
+            <abbr title="" class="d-none">
+              <div class="signo-interrogacion">?</div>
+            </abbr>
+            <div id="emailHelp" class="form-text">
+              No compartiremos tu mail con nadie más.
+            </div>
+          </div>
+
+          <div class="contenedor-input mb-2 mt-5">
+            <label for="userPass" class="form-label">Contraseña</label>
+            <input
+              type="password"
+              class="form-control"
+              id="userPass"
+              required
+              placeholder=""
+              pattern="^(?=.*[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ])(?=.*\d)[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\d_]{6,30}$"
+            />
+            <abbr title="" class="d-none">
+              <div class="signo-interrogacion">?</div>
+            </abbr>
+          </div>
+
+          <div class="contenedor-input mb-2 mt-5">
+            <label for="userConfirmPass" class="form-label"
+              >Confirmar contraseña</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              id="userConfirmPass"
+              required
+              placeholder=""
+              pattern="^(?=.*[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ])(?=.*\d)[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\d_]{6,30}$"
+            />
+            <abbr title="" class="d-none">
+              <div class="signo-interrogacion">?</div>
+            </abbr>
+          </div>
+
+          <div class="contenedor-input-check mb-3 form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="userCheck"
+              required
+            />
+            <label class="form-check-label" for="userCheck"
+              >Términos y condiciones</label
+            >
+            <abbr title="" class="d-none">
+              <div class="signo-interrogacion check">?</div>
+            </abbr>
+          </div>
+
+          <button type="submit" class="btn btn-success" id="botonRegistro">
+            Resgistrarse
+          </button>
+        </form>
+      </div>
+    </main>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script type="module" src="../js/registro.js"></script>
+  </body>
+</html>

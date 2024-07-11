@@ -1,0 +1,72 @@
+@import url('./variables.css');
+
+.inicio-sesion, .registro {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.contenedor-input {
+    position: relative;
+
+    label {
+        position: absolute;
+        top: 6px;
+        left: 10px;
+        transition: .3s ease all;
+        color: black;
+        cursor: text;
+        user-select: none;
+    }
+    
+    input{
+        display: inline-block;
+    }
+}
+
+.contenedor-input-check {
+    position: relative;
+}
+
+.signo-interrogacion {
+    position: absolute;
+    right: -35px;
+    top: 6px;
+    display: flex; /* Usa flexbox para centrar vertical y horizontalmente */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    border: solid 1px rgba(0, 0, 0, 0.7);
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.signo-interrogacion.check {
+    font-size: .75em;
+    top: 50%; /* Alinea verticalmente al centro */
+    right: 0; /* Posiciona a la derecha del texto con un margen */
+    transform: translateY(-50%); /* Ajusta la posición para centrar verticalmente */
+}
+
+.contenedor-input:has(.form-control:focus) .form-label {
+    top: -35px;
+    cursor: default;
+    color: white;
+}
+
+.contenedor-input:has(.form-control:valid) .form-label {
+    top: -35px;
+    color: #2ecece;
+}
+
+.contenedor-input:has(.form-control:invalid:not(:placeholder-shown)) .form-label {
+    top: -35px;
+    color: red;
+}
+
+.check-invalid {
+    color: red;
+}

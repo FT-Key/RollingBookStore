@@ -1,0 +1,63 @@
+@import url('./variables.css');
+
+.container-principal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-producto {
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.producto-img {
+    max-width: 400px;
+    width: 100%;
+    border-radius: 10px;
+    aspect-ratio: 5/8;
+}
+
+.producto-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.producto-titulo {
+    margin-bottom: 10px;
+}
+
+.producto-descripcion {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.producto-precio {
+    font-weight: bold;
+    color: var(--color-dinero);
+    margin-bottom: 20px;
+}
+
+.botones {
+    display: flex;
+    gap: 10px;
+}
+
+.btn.favoritos {
+    background-color: #ff4769;
+    color: white;
+}
+
+.btn.favoritos:hover {
+    background-color: #ea4160;
+    color: white;
+}
