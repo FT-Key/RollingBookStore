@@ -57,6 +57,8 @@ export function generarCards() {
 
 // Establece un evento para los botones de las cards, el cual redirige a la pagina de detalle del libro
 document.addEventListener("DOMContentLoaded", () => {
+  // Redimensionar el canvas
+  resizeCanvas();
   // Función para añadir event listeners a los botones
   const agregarEventoABotonesVerDetalle = () => {
     const botonesDetalle = document.querySelectorAll(".btn-primary");
@@ -110,9 +112,7 @@ function generarDestacados() {
     items[i].href = `./detalleLibro.html?id=${libro.id}`;
     abbrs[i].title = libro.titulo;
     imgs[i].src = libro.imagenURL;
-  });
-
-  resizeCanvas();
+  });  
 }
 
 // TESTEO

@@ -8,7 +8,7 @@ const arrayColors = ['#eee', '#60535A', '#80494F', '#516C65', '#CECA69'];
 
 const initializeDots = () => {
     dots = [];
-    for (let index = 0; index < 25; index++) {
+    for (let index = 0; index < 50; index++) {
         dots.push({
             x: Math.floor(Math.random() * canvas.width),
             y: Math.floor(Math.random() * canvas.height),
