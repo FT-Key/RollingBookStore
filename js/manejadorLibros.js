@@ -10,12 +10,12 @@ export class Libro {
     #idioma;
     #descripcion;
     #precio;
-    #categoria;
+    #categorias;
     #stock;
     #imagenURL;
     #bloqueado;
 
-    constructor(id, titulo, autor, isbn, editorial, fechaPublicacion, numeroPaginas, genero, idioma, descripcion, precio, categoria, stock, imagenURL, bloqueado = false) {
+    constructor(id, titulo, autor, isbn, editorial, fechaPublicacion, numeroPaginas, genero, idioma, descripcion, precio, categorias = [], stock, imagenURL, bloqueado = false) {
         this.#id = id;
         this.#titulo = titulo;
         this.#autor = autor;
@@ -27,7 +27,7 @@ export class Libro {
         this.#idioma = idioma;
         this.#descripcion = descripcion;
         this.#precio = precio;
-        this.#categoria = categoria;
+        this.#categorias = categorias;
         this.#stock = stock;
         this.#imagenURL = imagenURL;
         this.#bloqueado = bloqueado;
@@ -78,8 +78,8 @@ export class Libro {
         return this.#precio;
     }
 
-    get categoria() {
-        return this.#categoria;
+    get categorias() {
+        return this.#categorias;
     }
 
     get stock() {
@@ -139,8 +139,8 @@ export class Libro {
         this.#precio = value;
     }
 
-    set categoria(value) {
-        this.#categoria = value;
+    set categorias(value) {
+        this.#categorias = value;
     }
 
     set stock(value) {
@@ -168,7 +168,7 @@ export class Libro {
             idioma: this.#idioma,
             descripcion: this.#descripcion,
             precio: this.#precio,
-            categoria: this.#categoria,
+            categorias: this.#categorias,
             stock: this.#stock,
             imagenURL: this.#imagenURL,
             bloqueado: this.#bloqueado
@@ -188,7 +188,7 @@ export class Libro {
             json.idioma,
             json.descripcion,
             json.precio,
-            json.categoria,
+            json.categorias,
             json.stock,
             json.imagenURL,
             json.bloqueado || false
@@ -209,7 +209,7 @@ export function recuperarLibrosDeLocalStorage() {
 }
 
 // Función para guardar el array de destacados en el localStorage
-export function guardarDestacadossEnLocalStorage(libros) {
+export function guardarDestacadosEnLocalStorage(libros) {
     const librosJSON = libros.map(libro => libro.toJSON());
     localStorage.setItem('librosdestacados', JSON.stringify(librosJSON));
 }

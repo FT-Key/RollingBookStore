@@ -10,14 +10,34 @@ NavbarModule.inicializarNavbar();
 FooterModule.agregarFooter();
 
 // Genera las cards de los libros
-export function generarCards() {
+export function generarCards(palabraClave = '') {
   const containerCards = document.querySelector("#container-productos");
-  const libros = LibrosModule.recuperarLibrosDeLocalStorage();
+  const librosSinFiltro = LibrosModule.recuperarLibrosDeLocalStorage();
+  let libros;
 
-  let estructuraCards = `<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-5 g-4 w-100">`;
+  if (palabraClave) {
+    // Convertir la palabra clave a minúsculas para una búsqueda insensible a mayúsculas
+    const palabraClaveMinuscula = palabraClave.toLowerCase();
 
-  for (let i = 0; i < libros.length; i++) {
-    estructuraCards += `
+    // Filtrar libros por título o cualquier categoría que contenga la palabra clave
+    libros = librosSinFiltro.filter(libro =>
+      libro.titulo.toLowerCase().includes(palabraClaveMinuscula) || libro.autor.toLowerCase().includes(palabraClaveMinuscula) || libro.categorias.some(cat => cat.toLowerCase().includes(palabraClaveMinuscula))
+    );
+  } else {
+    // Si no hay palabra clave, mostrar todos los libros
+    libros = librosSinFiltro;
+  }
+
+  if (!libros.length) {
+    const h1 = document.createElement('h1');
+    h1.textContent = `No se encontraron resultados para la búsqueda '${palabraClave}'`;
+    containerCards.innerHTML = '';
+    containerCards.insertAdjacentElement('beforeend', h1);
+  } else {
+    let estructuraCards = `<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-5 g-4 w-100">`;
+
+    for (let i = 0; i < libros.length; i++) {
+      estructuraCards += `
         <div class="col">
             <div class="card">
                 <img class="card-img-top" alt="">
@@ -30,32 +50,33 @@ export function generarCards() {
             </div>
         </div>
         `;
+    }
+
+    estructuraCards += `</div>`;
+    containerCards.innerHTML = estructuraCards;
+
+    // Seleccionar todos los elementos generados dentro del containerCards
+    const imagenes = containerCards.querySelectorAll(".card-img-top");
+    const abbrs = containerCards.querySelectorAll("abbr");
+    const titulos = containerCards.querySelectorAll(".card-title");
+    const textos = containerCards.querySelectorAll(".card-text");
+    const precios = containerCards.querySelectorAll(".card-price");
+    const enlaces = containerCards.querySelectorAll(".btn-primary");
+
+    // Iterar sobre los libros y asignarles los valores correspondientes
+    libros.forEach((libro, index) => {
+      imagenes[index].src = libro.imagenURL;
+      imagenes[index].alt = libro.titulo;
+      abbrs[index].title = libro.titulo;
+      titulos[index].textContent = libro.titulo;
+      textos[index].textContent = libro.descripcion;
+      precios[index].textContent = `$${libro.precio.toFixed(2)}`;
+      enlaces[index].setAttribute("data-id", libro.id);
+    });
   }
-
-  estructuraCards += `</div>`;
-  containerCards.innerHTML = estructuraCards;
-
-  // Seleccionar todos los elementos generados dentro del containerCards
-  const imagenes = containerCards.querySelectorAll(".card-img-top");
-  const abbrs = containerCards.querySelectorAll("abbr");
-  const titulos = containerCards.querySelectorAll(".card-title");
-  const textos = containerCards.querySelectorAll(".card-text");
-  const precios = containerCards.querySelectorAll(".card-price");
-  const enlaces = containerCards.querySelectorAll(".btn-primary");
-
-  // Iterar sobre los libros y asignarles los valores correspondientes
-  libros.forEach((libro, index) => {
-    imagenes[index].src = libro.imagenURL;
-    imagenes[index].alt = libro.titulo;
-    abbrs[index].title = libro.titulo;
-    titulos[index].textContent = libro.titulo;
-    textos[index].textContent = libro.descripcion;
-    precios[index].textContent = `$${libro.precio.toFixed(2)}`;
-    enlaces[index].setAttribute("data-id", libro.id);
-  });
 }
 
-// Establece un evento para los botones de las cards, el cual redirige a la pagina de detalle del libro
+// Establece un evento para los botones de las cards, el cual redirige a la pagina de detalle del libro y otro para la barra de busqueda
 document.addEventListener("DOMContentLoaded", () => {
   // Redimensionar el canvas
   resizeCanvas();
@@ -71,6 +92,20 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   };
+  const agregarEventoABotonBusqueda = () => {
+    const botonSearch = document.querySelector('#botonBusquedaNavbar');
+
+    botonSearch.addEventListener('click', function (event) {
+      event.preventDefault(); // Evita que el formulario se envíe automáticamente
+      const inputBusqueda = document.querySelector("#inputBusquedaNavbar");
+      const palabraClave = inputBusqueda.value;
+
+      generarCards(palabraClave);
+      inputBusqueda.form.reset();
+    });
+  };
+
+  agregarEventoABotonBusqueda();
   agregarEventoABotonesVerDetalle();
 });
 
@@ -83,7 +118,7 @@ function generarDestacados() {
   const destacados = document.querySelector("#container-destacados");
 
   let estructura = `
-    <h1>Libros Destacados</h1>
+    <h1 class="text-center">Libros Destacados</h1>
     <div class="destacados my-4 w-100">
         <div class="slider" reverse="true" style="
         --width: 200px;
@@ -112,7 +147,21 @@ function generarDestacados() {
     items[i].href = `./detalleLibro.html?id=${libro.id}`;
     abbrs[i].title = libro.titulo;
     imgs[i].src = libro.imagenURL;
-  });  
+  });
+}
+
+// Función para extraer el valor de palabraClave del pathname
+function obtenerValorPalabraClave() {
+  // Obtener los parámetros de búsqueda (query parameters)
+  const params = new URLSearchParams(window.location.search);
+
+  if (params.has('palabraClave')) {
+    // Encontrado, retornar el valor de palabraClave
+    return params.get('palabraClave');
+  } else {
+    // No encontrado
+    return null;
+  }
 }
 
 // TESTEO
@@ -134,7 +183,7 @@ export function agregarLibrosLocalStorage() {
       "Español",
       "Una novela épica que cuenta la historia de la familia Buendía en el pueblo ficticio de Macondo.",
       20.0,
-      "Novela",
+      ["Novela", "Realismo mágico"],
       100,
       "https://images.cdn3.buscalibre.com/fit-in/360x360/b9/d5/b9d5d415d11423d0f9e98074ee6997d9.jpg"
     ),
@@ -150,7 +199,7 @@ export function agregarLibrosLocalStorage() {
       "Inglés",
       "Una novela sobre un régimen totalitario que usa la vigilancia y el control mental para mantener el poder.",
       15.0,
-      "Novela",
+      ["Novela", "Distopía"],
       150,
       "https://images.cdn1.buscalibre.com/fit-in/360x360/b0/39/b039af065268818b7bd3b0e016f8db65.jpg"
     ),
@@ -166,7 +215,7 @@ export function agregarLibrosLocalStorage() {
       "Inglés",
       "La historia de la misteriosa vida y la trágica caída de Jay Gatsby en los años 20.",
       10.0,
-      "Novela",
+      ["Novela", "Tragedia"],
       200,
       "https://images.cdn1.buscalibre.com/fit-in/360x360/79/10/7910192738466d49a312d49c146c41ca.jpg"
     ),
@@ -182,7 +231,7 @@ export function agregarLibrosLocalStorage() {
       "Inglés",
       "Una historia conmovedora sobre la injusticia racial en el sur de los Estados Unidos.",
       12.0,
-      "Novela",
+      ["Novela", "Drama"],
       300,
       "https://images.cdn2.buscalibre.com/fit-in/360x360/0f/25/0f25231fd7db1c56defb44d67d8cf4a7.jpg"
     ),
@@ -198,7 +247,7 @@ export function agregarLibrosLocalStorage() {
       "Inglés",
       "Una crítica social y una historia de amor en la Inglaterra del siglo XIX.",
       14.0,
-      "Novela",
+      ["Novela", "Romance"],
       250,
       "https://images.cdn1.buscalibre.com/fit-in/360x360/8d/db/8ddb85fa0d426826f9768649a412fc96.jpg"
     ),
@@ -214,7 +263,7 @@ export function agregarLibrosLocalStorage() {
       "Español",
       "Las aventuras de un hidalgo que pierde la cordura y se cree un caballero andante.",
       25.0,
-      "Novela",
+      ["Novela", "Aventura"],
       400,
       "https://images.cdn1.buscalibre.com/fit-in/360x360/19/c7/19c70e689956601918101b09f0bb0b3c.jpg"
     ),
@@ -230,7 +279,7 @@ export function agregarLibrosLocalStorage() {
       "Francés",
       "Una exploración profunda de la memoria y el tiempo en una serie de siete volúmenes.",
       30.0,
-      "Novela",
+      ["Novela", "Modernismo"],
       100,
       "https://images.cdn3.buscalibre.com/fit-in/360x360/38/43/3843fd42f123e78d4bc8256b48d4aeaa.jpg"
     ),
@@ -246,7 +295,7 @@ export function agregarLibrosLocalStorage() {
       "Griego",
       "El poema épico que narra las aventuras de Odiseo en su regreso a casa.",
       18.0,
-      "Poesía",
+      ["Poesía", "Épico"],
       150,
       "https://images.cdn3.buscalibre.com/fit-in/360x360/c0/5a/c05ad53842227a1416e03310ee840934.jpg"
     ),
@@ -262,7 +311,7 @@ export function agregarLibrosLocalStorage() {
       "Inglés",
       "Un día en la vida de Leopold Bloom en Dublín, una obra compleja y revolucionaria.",
       22.0,
-      "Novela",
+      ["Novela", "Modernismo"],
       120,
       "https://images.cdn1.buscalibre.com/fit-in/360x360/ca/38/ca38bb7ea927dd838fe708e1be603c22.jpg"
     ),
@@ -278,7 +327,7 @@ export function agregarLibrosLocalStorage() {
       "Ruso",
       "La historia de un joven estudiante que comete un asesinato y lucha con la culpa.",
       16.0,
-      "Novela",
+      ["Novela", "Filosofía"],
       130,
       "https://images.cdn2.buscalibre.com/fit-in/360x360/19/71/197115dd28b68f7a296b8f1e7cb323b4.jpg"
     ),
@@ -294,7 +343,7 @@ export function agregarLibrosLocalStorage() {
       "Italiano",
       "Un viaje alegórico a través del Infierno, el Purgatorio y el Paraíso.",
       20.0,
-      "Poesía",
+      ["Poesía", "Épico"],
       110,
       "https://images.cdn1.buscalibre.com/fit-in/360x360/2d/27/2d27e38f62d9fb6b878fd7b9ecaa2ade.jpg"
     ),
@@ -310,7 +359,7 @@ export function agregarLibrosLocalStorage() {
       "Inglés",
       "Un joven hace un pacto para mantener su juventud mientras su retrato envejece en su lugar.",
       10.0,
-      "Novela",
+      ["Novela", "Gótico"],
       210,
       "https://images.cdn1.buscalibre.com/fit-in/360x360/d8/53/d853616d4256d2146af2a543f224af84.jpg"
     ),
@@ -326,7 +375,7 @@ export function agregarLibrosLocalStorage() {
       "Francés",
       "Un piloto perdido en el desierto conoce a un joven príncipe de otro planeta.",
       8.0,
-      "Novela",
+      ["Novela", "Fantasía"],
       300,
       "https://images.cdn3.buscalibre.com/fit-in/360x360/68/0e/680e4d2b23ce77fc5520e984aeb2b68e.jpg"
     ),
@@ -342,7 +391,7 @@ export function agregarLibrosLocalStorage() {
       "Inglés",
       "Un futuro donde los libros están prohibidos y los bomberos queman cualquiera que encuentren.",
       12.0,
-      "Novela",
+      ["Novela", "Distopía"],
       220,
       "https://images.cdn1.buscalibre.com/fit-in/360x360/1d/c5/1dc574c26b120590e37b0e6957173369.jpg"
     ),
@@ -358,7 +407,7 @@ export function agregarLibrosLocalStorage() {
       "Inglés",
       "Una trágica historia de amor y venganza en las frías colinas de Yorkshire.",
       15.0,
-      "Novela",
+      ["Novela", "Gótico"],
       180,
       "https://images.cdn2.buscalibre.com/fit-in/360x360/05/ba/05ba3a2bb530701cacdb4f70034bc9ab.jpg"
     ),
@@ -383,7 +432,7 @@ export function agregarDestacadosLocalStorage() {
       "Español",
       "Una novela épica que cuenta la historia de la familia Buendía en el pueblo ficticio de Macondo.",
       20.0,
-      "Novela",
+      ["Novela", "Realismo mágico"],
       100,
       "https://images.cdn3.buscalibre.com/fit-in/360x360/b9/d5/b9d5d415d11423d0f9e98074ee6997d9.jpg"
     ),
@@ -399,7 +448,7 @@ export function agregarDestacadosLocalStorage() {
       "Inglés",
       "Una novela sobre un régimen totalitario que usa la vigilancia y el control mental para mantener el poder.",
       15.0,
-      "Novela",
+      ["Novela", "Distopía"],
       150,
       "https://images.cdn1.buscalibre.com/fit-in/360x360/b0/39/b039af065268818b7bd3b0e016f8db65.jpg"
     ),
@@ -415,13 +464,13 @@ export function agregarDestacadosLocalStorage() {
       "Inglés",
       "La historia de la misteriosa vida y la trágica caída de Jay Gatsby en los años 20.",
       10.0,
-      "Novela",
+      ["Novela", "Tragedia"],
       200,
       "https://images.cdn1.buscalibre.com/fit-in/360x360/79/10/7910192738466d49a312d49c146c41ca.jpg"
-    ),
+    )
   ];
 
-  LibrosModule.guardarDestacadossEnLocalStorage(librosEjemplo);
+  LibrosModule.guardarDestacadosEnLocalStorage(librosEjemplo);
 }
 
 export function agregarUsuarioNuevo() {
@@ -450,7 +499,7 @@ if (!localStorage.getItem("usuarios")) {
 }
 
 generarDestacados();
-generarCards();
+generarCards(obtenerValorPalabraClave() || '');
 
 // Las agrego al ámbito global para que puedan ser llamadas por consola
 window.agregarLibrosLocalStorage = agregarLibrosLocalStorage;
