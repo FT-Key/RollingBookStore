@@ -35,6 +35,7 @@ function inicializar() {
             <p class="producto-paginas"><strong>Páginas:</strong> <span></span></p>
             <p class="producto-genero"><strong>Género:</strong> <span></span></p>
             <p class="producto-idioma"><strong>Idioma:</strong> <span></span></p>
+            <p class="producto-categorias"><strong>Categorías:</strong> <span></span></p>
             <p class="producto-stock"><strong>Stock:</strong> <span></span></p>
             <div class="botones">
                 <button class="btn favoritos">Agregar a Favoritos</button>
@@ -45,21 +46,16 @@ function inicializar() {
 
     const img = containerProducto.querySelector(".producto-img");
     const titulo = containerProducto.querySelector(".producto-titulo");
-    const descripcion = containerProducto.querySelector(
-      ".producto-descripcion"
-    );
+    const descripcion = containerProducto.querySelector(".producto-descripcion");
     const precio = containerProducto.querySelector(".producto-precio");
     const autor = containerProducto.querySelector(".producto-autor span");
     const isbn = containerProducto.querySelector(".producto-isbn span");
-    const editorial = containerProducto.querySelector(
-      ".producto-editorial span"
-    );
-    const fechaPublicacion = containerProducto.querySelector(
-      ".producto-fecha-publicacion span"
-    );
+    const editorial = containerProducto.querySelector(".producto-editorial span");
+    const fechaPublicacion = containerProducto.querySelector(".producto-fecha-publicacion span");
     const paginas = containerProducto.querySelector(".producto-paginas span");
     const genero = containerProducto.querySelector(".producto-genero span");
     const idioma = containerProducto.querySelector(".producto-idioma span");
+    const categorias = containerProducto.querySelector(".producto-categorias span");
     const stock = containerProducto.querySelector(".producto-stock span");
 
     if (producto) {
@@ -75,12 +71,13 @@ function inicializar() {
       paginas.textContent = producto.numeroPaginas;
       genero.textContent = producto.genero;
       idioma.textContent = producto.idioma;
+      categorias.textContent = producto.categorias.join(', '); // Unir categorías con una coma
       stock.textContent = producto.stock;
     } else {
       // window.location.href = `./404.html`;
     }
   } else {
-    //window.location.href = `./404.html`;
+    // window.location.href = `./404.html`;
   }
 }
 

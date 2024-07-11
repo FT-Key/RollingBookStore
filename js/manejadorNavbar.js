@@ -214,9 +214,9 @@ export function agregarElementoNavbar(elemento) {
 export function agregarSearchNavbar() {
   let searchBar = `
     <form class="d-flex me-auto mt-3 mt-md-0" role="search">
-        <input id="searchBar" class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+        <input id="inputBusquedaNavbar" class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
         <abbr title="Buscar">
-            <button class="btn btn-success d-flex justify-content-cente align-items-center h-100" type="submit">
+            <button id="botonBusquedaNavbar" class="btn btn-success d-flex justify-content-cente align-items-center h-100" type="submit">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                 </svg>
@@ -311,35 +311,33 @@ export function inicializarNavbar() {
     UsuariosModule.guardarUsuarioEnSessionStorage(usuario);
     vistaMiembro = !vistaMiembro;
     sessionStorage.setItem('vistaMiembro', JSON.stringify(vistaMiembro));
-
+    history.replaceState(null, document.title, window.location.pathname); // Limpiar parámetros de búsqueda
     location.reload()
   });
 
   const favoritos = new NavbarLink("Favoritos", "pages/favoritos.html");
   const carrito = new NavbarLink("Carrito", "pages/carrito.html");
+  const esInicio = window.location.pathname === "/index.html" || window.location.pathname === "/";
 
   switch (true) {
     case usuario === null:
 
       let iniSes;
-      if (window.location.pathname === "/index.html" || window.location.pathname === "/") {
-        iniSes = "./pages/inicioSesion.html";
-      } else {
-        iniSes = "../pages/inicioSesion.html";
-      }
-
       let reg;
-      if (window.location.pathname === "/index.html" || window.location.pathname === "/") {
-        reg = "./pages/registro.html";
-      } else {
+
+      if (!esInicio) {
+        iniSes = "../pages/inicioSesion.html";
         reg = "../pages/registro.html";
+        agregarSearchNavbar();
+      } else {
+        iniSes = "./pages/inicioSesion.html";
+        reg = "./pages/registro.html";
       }
 
       const iniciarSesion = new NavbarLink("Iniciar Sesión", iniSes);
       const registrarse = new NavbarLink("Registrarse", reg);
       agregarElementoNavbar(iniciarSesion);
       agregarElementoNavbar(registrarse);
-      agregarSearchNavbar();
       break;
 
     case usuario.role === "miembro" || usuario.role === "miembroTest":
@@ -351,7 +349,10 @@ export function inicializarNavbar() {
         cambiarVistaEstilo();
       }
       agregarElementoNavbar(cerrarSesion);
-      agregarSearchNavbar();
+      if (!esInicio) {
+        agregarSearchNavbar();
+      }
+
       break;
 
     case usuario.role === "admin":
@@ -362,13 +363,29 @@ export function inicializarNavbar() {
       agregarElementoNavbar(catalogo);
       agregarElementoNavbar(cambiarVista);
       agregarElementoNavbar(cerrarSesion);
-      agregarSearchNavbar();
+      if (!esInicio) {
+        agregarSearchNavbar();
+      }
       break;
 
     default:
       console.log("No se ha iniciado sesión.");
       break;
   }
+
+  if (window.location.pathname !== "/pages/inicio.html") {
+    const botonSearch = document.querySelector('#botonBusquedaNavbar');
+
+    botonSearch.addEventListener('click', function (event) {
+      event.preventDefault(); // Evita que el formulario se envíe automáticamente
+
+      const inputBusqueda = document.querySelector("#inputBusquedaNavbar");
+      const palabraClave = inputBusqueda.value;
+
+      location.href = "/pages/inicio.html?palabraClave=" + encodeURIComponent(palabraClave);
+    });
+  }
+
 }
 
 // Exporta todo lo definido en este módulo (manejadorNavbar.js)

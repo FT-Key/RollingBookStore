@@ -25,4 +25,7 @@ body {
       transparent 2px 150px
     ),
     radial-gradient(at 50% 50%, var(--color-3), var(--color-4));
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
