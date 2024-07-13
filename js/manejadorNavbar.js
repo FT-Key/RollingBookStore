@@ -297,6 +297,7 @@ export function inicializarNavbar() {
   const cerrarSesion = new NavbarLinkButton("Cerrar Sesión", function () {
     UsuariosModule.eliminarUsuarioDeSessionStorage();
     sessionStorage.removeItem('vistaMiembro');
+    localStorage.removeItem('usuarioRecordado');
     location.href = "/pages/inicioSesion.html";
   });
 

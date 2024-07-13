@@ -2,6 +2,7 @@ import * as UsuariosModule from "./manejadorUsuarios.js";
 import * as RutasProtegidassModule from "./rutasProtegidas.js";
 import * as NavbarModule from "./manejadorNavbar.js";
 import * as FooterModule from "./footer.js";
+import { validarNombreUsuario, validarContraseniaUsuario, validarCorreoElectronico } from "./validaciones.js";
 
 RutasProtegidassModule.protegerRuta(true, true, true);
 NavbarModule.inicializarNavbar();
@@ -20,6 +21,8 @@ function comprobarInicioSesion() {
   let usuario = UsuariosModule.recuperarUsuarioDeSessionStorage();
 
   if (usuario) {
+    const titulo = document.querySelector('h1');
+    titulo.remove();
     const divRegistro = document.querySelector(".registro");
     const formRegistro = divRegistro.querySelector("form");
 
@@ -219,32 +222,6 @@ function registrarse(event) {
     UsuariosModule.guardarUsuariosEnLocalStorage(usuarios);
     location.href = "./inicioSesion.html";
   }
-}
-
-function validarNombreUsuario(nombreUsuario) {
-  // Expresión regular
-  const regex =
-    /^(?=.*[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ])[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\d\-_\.]{3,30}$/;
-
-  // Comprobar si el valor de nombreUsuario cumple con la expresión regular
-  return regex.test(nombreUsuario);
-}
-
-function validarContraseniaUsuario(nombreUsuario) {
-  // Expresión regular
-  const regex =
-    /^(?=.*[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ])(?=.*\d)[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\d_]{6,30}$/;
-
-  // Comprobar si el valor de nombreUsuario cumple con la expresión regular
-  return regex.test(nombreUsuario);
-}
-
-function validarCorreoElectronico(correo) {
-  // Expresión regular
-  const regex = /^[a-zA-Z0-9_]{3,40}@[a-zA-Z0-9_]+\.[a-zA-Z0-9]+$/;
-
-  // Comprobar si el valor de correoUsuario cumple con la expresión regular
-  return regex.test(correo);
 }
 
 comprobarInicioSesion();
