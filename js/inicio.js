@@ -480,7 +480,10 @@ export function agregarUsuarioNuevo() {
     "franco@gmail.com",
     "Abcd123",
     "admin",
-    true
+    true,
+    false,
+    false,
+    [1, 3, 10]
   );
 
   const usuarios = [usuarioNuevo];
