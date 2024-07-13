@@ -9,8 +9,9 @@ export class Usuario {
     #recordar;
     #favoritos;
     #carrito;
+    #bloqueado;
 
-    constructor(id, nombre, email, contrasenia, role, terms, login = false, recordar = false, favoritos = [], carrito = []) {
+    constructor(id, nombre, email, contrasenia, role, terms, login = false, recordar = false, favoritos = [], carrito = [], bloqueado = false) {
         this.#id = id;
         this.#nombre = nombre;
         this.#email = email;
@@ -21,6 +22,7 @@ export class Usuario {
         this.#recordar = recordar;
         this.#favoritos = favoritos;
         this.#carrito = carrito;
+        this.#bloqueado = bloqueado;
     }
 
     // Getters
@@ -65,6 +67,10 @@ export class Usuario {
         return this.#carrito;
     }
 
+    get bloqueado() {
+        return this.#bloqueado;
+    }
+
     // Setters
 
     set id(id) {
@@ -107,6 +113,10 @@ export class Usuario {
         this.#carrito = carrito;
     }
 
+    set bloqueado(bloqueado) {
+        this.#bloqueado = bloqueado;
+    }
+
     // Métodos para serialización y deserialización
     toJSON() {
         return {
@@ -119,7 +129,8 @@ export class Usuario {
             login: this.#login,
             recordar: this.#recordar,
             favoritos: this.#favoritos,
-            carrito: this.#carrito
+            carrito: this.#carrito,
+            bloqueado: this.#bloqueado
         };
     }
 
@@ -134,7 +145,8 @@ export class Usuario {
             json.login,
             json.recordar,
             json.favoritos,
-            json.carrito
+            json.carrito,
+            json.bloqueado
         );
     }
 }
@@ -151,13 +163,40 @@ export function recuperarUsuariosDeLocalStorage() {
     return usuariosJSON.map(json => Usuario.fromJSON(json));
 }
 
-function encryptPassword(password, key) {
+export function encryptPassword(password, key) {
     return CryptoJS.AES.encrypt(password, key).toString();
 }
 
-function decryptPassword(encryptedPassword, key) {
+export function decryptPassword(encryptedPassword, key) {
     const bytes = CryptoJS.AES.decrypt(encryptedPassword, key);
     return bytes.toString(CryptoJS.enc.Utf8);
+}
+
+// Función para encriptar un ID utilizando CryptoJS
+export function encryptId(id, key) {
+    return CryptoJS.AES.encrypt(id.toString(), key).toString();
+}
+
+// Función para desencriptar un ID utilizando CryptoJS
+export function decryptId(encryptedId, key) {
+    const bytes = CryptoJS.AES.decrypt(encryptedId, key);
+    return bytes.toString(CryptoJS.enc.Utf8);
+}
+
+// Función para guardar el ID encriptado en el localStorage
+export function guardarUsuarioRecordadoLocalStorage(id) {
+    const encryptedId = encryptId(id, 'key123');
+    localStorage.setItem('usuarioRecordado', encryptedId);
+}
+
+// Función para recuperar y desencriptar el ID del localStorage
+export function recuperarUsuarioRecordadoLocalStorage() {
+    const encryptedId = localStorage.getItem('usuarioRecordado');
+    if (encryptedId) {
+        const decryptedId = decryptId(encryptedId, 'key123');
+        return parseInt(decryptedId, 10); // Parseamos a entero base 10
+    }
+    return null;
 }
 
 // Función para guardar un usuario en el sessionStorage

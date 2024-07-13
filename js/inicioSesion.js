@@ -2,6 +2,7 @@ import * as UsuariosModule from "./manejadorUsuarios.js";
 import * as RutasProtegidassModule from "./rutasProtegidas.js";
 import * as NavbarModule from "./manejadorNavbar.js";
 import * as FooterModule from "./footer.js";
+import { validarNombreUsuario, validarContraseniaUsuario } from "./validaciones.js";
 
 RutasProtegidassModule.protegerRuta(true, true, true);
 NavbarModule.inicializarNavbar();
@@ -16,6 +17,8 @@ function comprobarInicioSesion() {
   let usuario = UsuariosModule.recuperarUsuarioDeSessionStorage();
 
   if (usuario) {
+    const titulo = document.querySelector('h1');
+    titulo.remove();
     const formInicioSesion = divInicioSesion.querySelector("form");
 
     // Eliminar el formulario completo de inicio de sesión
@@ -114,7 +117,7 @@ function iniciarSesion(event) {
       patternIndications[1].getAttribute("title").trim() === "";
 
     if (!contraseniasIguales && noExisteErrorContrasenia) {
-      boundSetError(1, "Contraseñas incorrecta.");
+      boundSetError(1, "Contraseña incorrecta.");
       setInvalid(contraseñaUsuario);
     }
   }
@@ -128,7 +131,17 @@ function iniciarSesion(event) {
     );
 
     if (recordarme.checked) {
+
+      if (sessionStorage.getItem('recordarUsuario')) {
+        const usuarioRecordado = usuarios.find(u => {
+          u.id == UsuariosModule.recuperarUsuarioRecordadoLocalStorage();
+        });
+
+        usuarioRecordado.recordar = false;
+      }
+
       usuario.recordar = true;
+      UsuariosModule.guardarUsuarioRecordadoLocalStorage(usuario.id);
     }
 
     usuario.login = true;
@@ -159,24 +172,6 @@ function setError(indice, mensajeError) {
   this.patternIndications[indice].setAttribute("title", mensajeError);
   this.patternIndications[indice].classList.remove("d-none");
   this.estado.error = true;
-}
-
-function validarNombreUsuario(nombreUsuario) {
-  // Expresión regular
-  const regex =
-    /^(?=.*[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ])[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\d\-_\.]{3,30}$/;
-
-  // Comprobar si el valor de nombreUsuario cumple con la expresión regular
-  return regex.test(nombreUsuario);
-}
-
-function validarContraseniaUsuario(nombreUsuario) {
-  // Expresión regular
-  const regex =
-    /^(?=.*[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ])(?=.*\d)[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\d_]{6,30}$/;
-
-  // Comprobar si el valor de nombreUsuario cumple con la expresión regular
-  return regex.test(nombreUsuario);
 }
 
 comprobarInicioSesion();
