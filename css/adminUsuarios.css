@@ -1,0 +1,192 @@
+@import url('/css/variables.css');
+
+/* Container Styles */
+#admin-usuarios {
+  width: 90%;
+  margin: 20px auto;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+  padding: 20px;
+  border-radius: 10px;
+
+  .fila-usuario:last-child{
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+}
+
+/* Row Styles */
+.fila-usuario {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 15px;
+}
+
+.fila-usuario:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Column Styles */
+.fila-usuario div {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+}
+
+.usuario-id {
+  flex: 0 0 10%;
+}
+
+.usuario-nombre {
+  flex: 0 0 20%;
+}
+
+.usuario-email {
+  flex: 0 0 25%;
+}
+
+.usuario-contrasenia {
+  flex: 0 0 15%;
+}
+
+.usuario-role {
+  flex: 0 0 10%;
+}
+
+.usuario-bloqueado {
+  flex: 0 0 10%;
+}
+
+.usuario-acciones {
+  flex: 0 0 10%;
+}
+
+/* Header Styles */
+.fila-usuario-header {
+  background-color: #4CAF50;
+  color: white;
+  font-weight: bold;
+  padding: 15px 15px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.fila-usuario-header div {
+  border-right: 1px solid #4CAF50;
+}
+
+.fila-usuario-header div:last-child {
+  border-right: none;
+}
+
+/* Hover Effect */
+.fila-usuario:hover {
+  background-color: #f1f1f1;
+}
+
+.fila-usuario.fila-usuario-header:hover {
+  background-color: #4CAF50;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .usuario-email {
+    flex: 0 0 20%;
+  }
+
+  .usuario-contrasenia,
+  .usuario-role,
+  .usuario-bloqueado,
+  .usuario-acciones {
+    flex: 0 0 15%;
+  }
+}
+
+@media (max-width: 992px) {
+  .usuario-email {
+    flex: 0 0 25%;
+  }
+
+  .usuario-contrasenia,
+  .usuario-role,
+  .usuario-bloqueado,
+  .usuario-acciones {
+    flex: 0 0 20%;
+  }
+}
+
+@media (max-width: 768px) {
+  .fila-usuario {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .fila-usuario div {
+    text-align: left;
+    flex: 1 0 100%;
+  }
+
+  .usuario-acciones {
+    text-align: right;
+  }
+}
+
+/* Estilos para el formulario de edición */
+
+/* Form Styles */
+.editar-usuario-form {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+/* Label Styles */
+.editar-usuario-form>div {
+  margin-bottom: 10px;
+}
+
+/* Input Styles */
+.editar-usuario-form input,
+.editar-usuario-form select {
+  width: 100%;
+  /* Ajuste para que quepan junto con el botón */
+  padding: 5px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Button Styles */
+.editar-usuario-form button {
+  padding: 6px 12px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.editar-usuario-form button:hover {
+  background-color: #45a049;
+}
+
+/* Regresar Button Style */
+.editar-usuario-form button.regresar-btn {
+  background-color: #ccc;
+  color: #333;
+  margin-top: 10px;
+}
+
+.editar-usuario-form button.regresar-btn:hover {
+  background-color: #bbb;
+}
