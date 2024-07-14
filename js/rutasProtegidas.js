@@ -63,4 +63,6 @@ export function comprobarUsuarioRecordado() {
     }
 }
 
+window.recuperarUsuarioRecordadoLocalStorage = UsuariosModule.recuperarUsuarioRecordadoLocalStorage;
+
 export * from '../js/rutasProtegidas.js';
