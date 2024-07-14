@@ -38,7 +38,7 @@ export function generarCardsFavoritos() {
                       <abbr title=""><h5 class="card-title"></h5></abbr>
                       <p class="card-text"></p>
                       <h5 class="card-price"></h5>
-                      <a class="btn btn-primary" data-id="">Ver detalles</a>
+                      <a class="btn btn-primary btn-detalle" data-id="">Ver detalles</a>
                   </div>
               </div>
           </div>
@@ -71,4 +71,19 @@ export function generarCardsFavoritos() {
 
 document.addEventListener('DOMContentLoaded', () => {
   generarCardsFavoritos();
+
+  // Función para añadir event listeners a los botones
+  const agregarEventoABotonesVerDetalle = () => {
+    const botonesDetalle = document.querySelectorAll(".btn-detalle");
+    botonesDetalle.forEach((boton) => {
+      boton.addEventListener("click", (event) => {
+        event.preventDefault(); // Evitar que el enlace navegue automáticamente
+        const idLibro = boton.getAttribute("data-id");
+        // Redirigir a detalleLibro.html con el ID del libro
+        window.location.href = `./detalleLibro.html?id=${idLibro}`;
+      });
+    });
+  };
+
+  agregarEventoABotonesVerDetalle();
 });

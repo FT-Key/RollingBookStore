@@ -74,6 +74,8 @@ export function generarCards(palabraClave = '') {
       enlaces[index].setAttribute("data-id", libro.id);
     });
   }
+
+  resizeCanvas();
 }
 
 // Establece un evento para los botones de las cards, el cual redirige a la pagina de detalle del libro y otro para la barra de busqueda

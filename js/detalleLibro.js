@@ -78,7 +78,6 @@ function inicializar() {
       const usuarios = UsuariosModule.recuperarUsuariosDeLocalStorage();
       const usuarioActual = UsuariosModule.recuperarUsuarioDeSessionStorage();
       const usuario = usuarios.find(u => u.id === usuarioActual.id);
-      console.log(usuario);
       const botonFav = document.querySelector('#btn-fav');
       const botonCar = document.querySelector('#btn-car');
 
