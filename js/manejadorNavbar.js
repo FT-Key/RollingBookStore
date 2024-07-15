@@ -312,12 +312,12 @@ export function inicializarNavbar() {
     UsuariosModule.guardarUsuarioEnSessionStorage(usuario);
     vistaMiembro = !vistaMiembro;
     sessionStorage.setItem('vistaMiembro', JSON.stringify(vistaMiembro));
-    history.replaceState(null, document.title, window.location.pathname); // Limpiar parámetros de búsqueda
     location.reload()
   });
 
   const favoritos = new NavbarLink("Favoritos", "pages/favoritos.html");
   const carrito = new NavbarLink("Carrito", "pages/carrito.html");
+  const catalogo = new NavbarLink("Catálogo", "pages/inicio.html");
   const esInicio = window.location.pathname === "/index.html" || window.location.pathname === "/";
 
   switch (true) {
@@ -345,6 +345,7 @@ export function inicializarNavbar() {
 
       agregarElementoNavbar(favoritos);
       agregarElementoNavbar(carrito);
+      agregarElementoNavbar(catalogo);
       if (usuario.role === "miembroTest") {
         agregarElementoNavbar(cambiarVista);
         cambiarVistaEstilo();
@@ -359,7 +360,6 @@ export function inicializarNavbar() {
     case usuario.role === "admin":
 
       const usuarios = new NavbarLink("Usuarios", "pages/adminUsuarios.html");
-      const catalogo = new NavbarLink("Catalogo", "pages/adminCatalogo.html");
       agregarElementoNavbar(usuarios);
       agregarElementoNavbar(catalogo);
       agregarElementoNavbar(cambiarVista);
