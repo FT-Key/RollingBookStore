@@ -102,7 +102,19 @@ document.addEventListener("DOMContentLoaded", () => {
       const inputBusqueda = document.querySelector("#inputBusquedaNavbar");
       const palabraClave = inputBusqueda.value;
 
+      // Obtiene la URL actual
+      let url = new URL(window.location.href);
+
+      if (url.search != '') {
+        // Limpia los parámetros de búsqueda
+        url.search = '';
+
+        // Actualiza la URL sin recargar la página
+        window.history.replaceState({}, document.title, url.toString());
+      }
+
       generarCards(palabraClave);
+
       inputBusqueda.form.reset();
     });
   };
