@@ -94,27 +94,31 @@ function iniciarSesion(event) {
 
   // Inicio de sesión
 
-  const existeUsuario = usuarios.some(
+  const usuario = usuarios.find(
     (user) => user.nombre === nombreUsuario.value
   );
-  const noExisteErrorNombre =
-    patternIndications[0].getAttribute("title").trim() === "";
 
-  if (!existeUsuario && noExisteErrorNombre) {
+  if (usuario) {
+    if (usuario.bloqueado) {
+      boundSetError(0, "Cuenta bloqueada");
+      setInvalid(nombreUsuario);
+      setInvalid(contraseñaUsuario);
+    }
+  }
+
+  const noExisteErrorNombre = patternIndications[0].getAttribute("title").trim() === "";
+
+  if (!usuario && noExisteErrorNombre) {
     boundSetError(0, "Usuario inexistente.");
     setInvalid(nombreUsuario);
     setInvalid(contraseñaUsuario);
-  } else if (existeUsuario && noExisteErrorNombre) {
+  } else if (usuario && noExisteErrorNombre) {
     comprobarContrasenia = true;
   }
 
   if (comprobarContrasenia) {
-    const usuario = usuarios.find(
-      (user) => user.nombre === nombreUsuario.value
-    );
     const contraseniasIguales = contraseñaUsuario.value === usuario.contrasenia;
-    const noExisteErrorContrasenia =
-      patternIndications[1].getAttribute("title").trim() === "";
+    const noExisteErrorContrasenia = patternIndications[1].getAttribute("title").trim() === "";
 
     if (!contraseniasIguales && noExisteErrorContrasenia) {
       boundSetError(1, "Contraseña incorrecta.");
@@ -123,9 +127,6 @@ function iniciarSesion(event) {
   }
 
   if (!estado.error) {
-    const usuario = usuarios.find(
-      (user) => user.nombre === nombreUsuario.value
-    );
     const indexUsuario = usuarios.findIndex(
       (user) => user.nombre === nombreUsuario.value
     );
@@ -145,8 +146,6 @@ function iniciarSesion(event) {
     }
 
     usuario.login = true;
-
-    usuarios[indexUsuario] = usuario;
 
     // Lógica de inicio de sesión
 
