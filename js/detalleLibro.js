@@ -147,10 +147,10 @@ function inicializar() {
       }
 
     } else {
-      window.location.href = `404.html`;
+      window.location.href = `error404.html`;
     }
   } else {
-    window.location.href = `404.html`;
+    window.location.href = `error404.html`;
   }
 }
 
