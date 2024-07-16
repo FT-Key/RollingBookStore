@@ -191,7 +191,7 @@ function generarDestacados() {
     btnEdit.classList.add('btn', 'btn-primary', 'btn-edit-destacados');
     btnEdit.textContent = "Editar destacados";
     btnEdit.addEventListener('click', () => {
-
+      window.location.href = `./adminDestacados.html`;
     });
 
     divBtnEdit.appendChild(btnEdit);
