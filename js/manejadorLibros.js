@@ -13,9 +13,9 @@ export class Libro {
     #categorias;
     #stock;
     #imagenURL;
-    #bloqueado;
+    #disponible;
 
-    constructor(id, titulo, autor, isbn, editorial, fechaPublicacion, numeroPaginas, genero, idioma, descripcion, precio, categorias = [], stock, imagenURL, bloqueado = false) {
+    constructor(id, titulo, autor, isbn, editorial, fechaPublicacion, numeroPaginas, genero, idioma, descripcion, precio, categorias = [], stock, imagenURL, disponible = true) {
         this.#id = id;
         this.#titulo = titulo;
         this.#autor = autor;
@@ -30,7 +30,7 @@ export class Libro {
         this.#categorias = categorias;
         this.#stock = stock;
         this.#imagenURL = imagenURL;
-        this.#bloqueado = bloqueado;
+        this.#disponible = disponible;
     }
 
     // Getters
@@ -90,8 +90,8 @@ export class Libro {
         return this.#imagenURL;
     }
 
-    get bloqueado() {
-        return this.#bloqueado;
+    get disponible() {
+        return this.#disponible;
     }
 
     // Setters
@@ -151,8 +151,8 @@ export class Libro {
         this.#imagenURL = value;
     }
 
-    set bloqueado(value) {
-        this.#bloqueado = value;
+    set disponible(value) {
+        this.#disponible = value;
     }
 
     toJSON() {
@@ -171,7 +171,7 @@ export class Libro {
             categorias: this.#categorias,
             stock: this.#stock,
             imagenURL: this.#imagenURL,
-            bloqueado: this.#bloqueado
+            disponible: this.#disponible
         };
     }
 
@@ -191,7 +191,7 @@ export class Libro {
             json.categorias,
             json.stock,
             json.imagenURL,
-            json.bloqueado || false
+            json.disponible === true || json.disponible === "true" // Asegurar que se interprete correctamente el valor booleano
         );
     }
 }

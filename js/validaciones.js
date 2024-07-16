@@ -26,7 +26,7 @@ export function validarCorreoElectronico(correo) {
 
 export function validarLibroTitulo(cadena) {
   // Expresión regular mejorada
-  const regex = /^[A-ZÁÉÍÓÚÑÜ][A-Za-zÁÉÍÓÚÑÜáéíóúñü0-9\s,'-:()!?]*$/;
+  const regex = /^[A-ZÁÉÍÓÚÑÜ0-9][A-Za-zÁÉÍÓÚÑÜáéíóúñü0-9\s,'-:()!?]*$/;
 
   // Comprobar si el valor de cadena cumple con la expresión regular
   return regex.test(cadena);
@@ -41,12 +41,12 @@ export function validarLibroDescripcion(cadena) {
 }
 
 export function validarLibroAutorGeneroIdiomaEditorial(cadena) {
-  const regex = /^[A-Za-zÁÉÍÓÚÑÜáéíóúñü\s,'-]+$/;
+  const regex = /^[A-Za-zÁÉÍÓÚÑÜáéíóúñü\s,'&-]+$/;
   return regex.test(cadena);
 }
 
 export function validarLibroISBN(cadena) {
-  const regex = /^(?:\d{9}[\dXx]|\d{13}|\d{1,5}-\d{1,7}-\d{1,7}-[\dXx])$/;
+  const regex = /^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$/;
   return regex.test(cadena);
 }
 
@@ -75,7 +75,7 @@ export function validarLibroImagenURL(cadena) {
   const regexURL = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))$/i;
   // Expresión regular para rutas locales
   const regexLocal = /^(\.\/|\.\.\/).*\/.*\.(?:png|jpg|jpeg|gif|webp)$/i;
-  
+
   // Comprobar si la cadena cumple con alguna de las dos expresiones regulares
   return regexURL.test(cadena) || regexLocal.test(cadena);
 }
