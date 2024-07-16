@@ -12,8 +12,12 @@ FooterModule.agregarFooter();
 // Genera las cards de los libros
 export function generarCards(palabraClave = '') {
   const containerCards = document.querySelector("#container-productos");
-  const librosSinFiltro = LibrosModule.recuperarLibrosDeLocalStorage();
+  let librosSinFiltro = LibrosModule.recuperarLibrosDeLocalStorage();
   let libros;
+
+  if (UsuariosModule.recuperarUsuarioDeSessionStorage().role != "admin") {
+    librosSinFiltro = librosSinFiltro.filter(libro => libro.disponible == true);
+  }
 
   if (palabraClave) {
     // Convertir la palabra clave a minúsculas para una búsqueda insensible a mayúsculas
@@ -45,7 +49,7 @@ export function generarCards(palabraClave = '') {
                     <abbr title=""><h5 class="card-title"></h5></abbr>
                     <p class="card-text"></p>
                     <h5 class="card-price"></h5>
-                    <a class="btn btn-primary" data-id="">Ver detalles</a>
+                    <a class="btn btn-primary btn-card" data-id="">Ver detalles</a>
                 </div>
             </div>
         </div>
@@ -75,6 +79,22 @@ export function generarCards(palabraClave = '') {
     });
   }
 
+  if (UsuariosModule.recuperarUsuarioDeSessionStorage().role == "admin") {
+    const divBtnNuevo = document.createElement("div");
+    divBtnNuevo.classList.add('div-btn-nuevo', 'd-flex', 'justify-content-start', 'w-100', 'ps-5');
+    const btnNuevo = document.createElement("button");
+    btnNuevo.type = "button";
+    btnNuevo.classList.add('btn', 'btn-primary', 'btn-nuevo');
+    btnNuevo.textContent = "Nuevo libro";
+    btnNuevo.addEventListener('click', () => {
+      window.location.href = `./editarLibro.html?id=-1`;
+    });
+
+    divBtnNuevo.appendChild(btnNuevo);
+
+    containerCards.insertAdjacentElement('beforebegin', divBtnNuevo);
+  }
+
   resizeCanvas();
 }
 
@@ -84,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
   resizeCanvas();
   // Función para añadir event listeners a los botones
   const agregarEventoABotonesVerDetalle = () => {
-    const botonesDetalle = document.querySelectorAll(".btn-primary");
+    const botonesDetalle = document.querySelectorAll(".btn-card");
     botonesDetalle.forEach((boton) => {
       boton.addEventListener("click", (event) => {
         event.preventDefault(); // Evitar que el enlace navegue automáticamente
@@ -162,6 +182,22 @@ function generarDestacados() {
     abbrs[i].title = libro.titulo;
     imgs[i].src = libro.imagenURL;
   });
+
+  if (UsuariosModule.recuperarUsuarioDeSessionStorage().role == "admin") {
+    const divBtnEdit = document.createElement("div");
+    divBtnEdit.classList.add('div-edit-destacados', 'd-flex', 'justify-content-start', 'w-100', 'ps-5', 'pt-3');
+    const btnEdit = document.createElement("button");
+    btnEdit.type = "button";
+    btnEdit.classList.add('btn', 'btn-primary', 'btn-edit-destacados');
+    btnEdit.textContent = "Editar destacados";
+    btnEdit.addEventListener('click', () => {
+
+    });
+
+    divBtnEdit.appendChild(btnEdit);
+
+    destacados.insertAdjacentElement('beforebegin', divBtnEdit);
+  }
 }
 
 // Función para extraer el valor de palabraClave del pathname

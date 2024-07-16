@@ -81,6 +81,16 @@
     border-radius: var(--bs-border-radius);
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
+
+.form-ctrl.is-invalid, .was-validated .form-control:invalid {
+    border-color: var(--bs-form-invalid-border-color);
+    padding-right: calc(1.5em + .75rem);
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+    background-image: url(https://static.vecteezy.com/system/resources/thumbnails/017/172/388/small_2x/warning-message-concept-represented-by-exclamation-mark-icon-exclamation-symbol-in-circle-png.png);
+}
+
 .producto-descripcion{
     min-width: 75%;
     width: 100%;
