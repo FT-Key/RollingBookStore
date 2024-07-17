@@ -318,7 +318,7 @@ export function inicializarNavbar() {
   const favoritos = new NavbarLink("Favoritos", "pages/favoritos.html");
   const carrito = new NavbarLink("Carrito", "pages/carrito.html");
   const catalogo = new NavbarLink("Catálogo", "pages/inicio.html");
-  const esInicio = window.location.pathname === "/index.html" || window.location.pathname === "/";
+  const esIndex = window.location.pathname === "/index.html" || window.location.pathname === "/";
 
   switch (true) {
     case usuario === null:
@@ -326,7 +326,7 @@ export function inicializarNavbar() {
       let iniSes;
       let reg;
 
-      if (!esInicio) {
+      if (!esIndex) {
         iniSes = "../pages/inicioSesion.html";
         reg = "../pages/registro.html";
         agregarSearchNavbar();
@@ -351,7 +351,7 @@ export function inicializarNavbar() {
         cambiarVistaEstilo();
       }
       agregarElementoNavbar(cerrarSesion);
-      if (!esInicio) {
+      if (!esIndex) {
         agregarSearchNavbar();
       }
 
@@ -364,7 +364,7 @@ export function inicializarNavbar() {
       agregarElementoNavbar(catalogo);
       agregarElementoNavbar(cambiarVista);
       agregarElementoNavbar(cerrarSesion);
-      if (!esInicio) {
+      if (!esIndex) {
         agregarSearchNavbar();
       }
       break;
@@ -374,7 +374,7 @@ export function inicializarNavbar() {
       break;
   }
 
-  if (window.location.pathname !== "/pages/inicio.html") {
+  if (window.location.pathname !== "/pages/inicio.html" && !esIndex) {
     const botonSearch = document.querySelector('#botonBusquedaNavbar');
 
     botonSearch.addEventListener('click', function (event) {
@@ -385,6 +385,9 @@ export function inicializarNavbar() {
 
       location.href = "/pages/inicio.html?palabraClave=" + encodeURIComponent(palabraClave);
     });
+  } else if(esIndex){
+    const navbar = document.querySelector('.navbar .container-fluid .collapse ul');
+    navbar.classList.add('ms-auto');
   }
 
 }

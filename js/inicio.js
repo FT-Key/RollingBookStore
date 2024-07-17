@@ -551,8 +551,10 @@ if (!localStorage.getItem("usuarios")) {
   agregarUsuarioNuevo();
 }
 
-generarDestacados();
-generarCards(obtenerValorPalabraClave() || '');
+document.addEventListener('DOMContentLoaded', () => {
+  generarDestacados();
+  generarCards(obtenerValorPalabraClave() || '');
+});
 
 // Las agrego al ámbito global para que puedan ser llamadas por consola
 window.agregarLibrosLocalStorage = agregarLibrosLocalStorage;
