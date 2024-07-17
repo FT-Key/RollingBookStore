@@ -92,6 +92,8 @@ function inicializar() {
             inicializar(); // Volver a inicializar para actualizar la vista
         }
     }
+
+    actualizarTotal();
 }
 
 function actualizarTotal() {
