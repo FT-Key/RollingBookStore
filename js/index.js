@@ -39,7 +39,6 @@ function bienvenidaIndex() {
     divBotones += `</div>`
 
     const containerBienvenida = document.querySelector('.container-bienvenida');
-    console.log(containerBienvenida);
     containerBienvenida.innerHTML += divBotones;
 }
 
