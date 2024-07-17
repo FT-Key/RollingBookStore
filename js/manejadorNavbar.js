@@ -265,7 +265,6 @@ export function agregarNavbar() {
   header.insertAdjacentHTML('afterbegin', estructuraNavbar);
 
   const navBrand = document.querySelector('.navbar-brand');
-  console.log(navBrand);
 
   const logo = document.createElement('img');
   if (location.pathname == "/" || location.pathname == "index.html") {
@@ -294,7 +293,7 @@ function cambiarVistaEstilo() {
   const item = cambiarVistaElement.querySelector('.nav-link.text-nowrap');
 
   // Aplicar estilos al elemento encontrado
-  if (cambiarVistaElement) {
+  if (cambiarVistaElement ) {
     item.style.color = "white";
     cambiarVistaElement.style.backgroundColor = "rgba(16, 106, 16, 0.8)";
     cambiarVistaElement.style.borderRadius = "10px";
@@ -306,7 +305,9 @@ export function inicializarNavbar() {
 
   let usuario = UsuariosModule.recuperarUsuarioDeSessionStorage() || null;
   let vistaMiembro = JSON.parse(sessionStorage.getItem('vistaMiembro')) || false;
-  console.log("VistaMiembro: ", vistaMiembro);
+  if (usuario.role == "admin") {
+    vistaMiembro = false;
+  }
 
   const cerrarSesion = new NavbarLinkButton("Cerrar Sesión", function () {
     UsuariosModule.eliminarUsuarioDeSessionStorage();
