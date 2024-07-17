@@ -109,14 +109,14 @@ function inicializar() {
             usuarioActual.favoritos.push(producto.id);
             botonFav.textContent = "Quitar de favoritos";
 
-            UsuariosModule.guardarUsuarioRecordadoLocalStorage(usuarios);
+            UsuariosModule.guardarUsuariosEnLocalStorage(usuarios);
             UsuariosModule.guardarUsuarioEnSessionStorage(usuarioActual);
           } else {
             usuario.favoritos = usuario.favoritos.filter(favId => favId !== producto.id);
             usuarioActual.favoritos = usuarioActual.favoritos.filter(favId => favId !== producto.id);
             botonFav.textContent = "Agregar a favoritos";
 
-            UsuariosModule.guardarUsuarioRecordadoLocalStorage(usuarios);
+            UsuariosModule.guardarUsuariosEnLocalStorage(usuarios);
             UsuariosModule.guardarUsuarioEnSessionStorage(usuarioActual);
           }
         });
@@ -127,14 +127,14 @@ function inicializar() {
             usuarioActual.carrito.push(producto.id);
             botonCar.textContent = "Quitar de carrito";
 
-            UsuariosModule.guardarUsuarioRecordadoLocalStorage(usuarios);
+            UsuariosModule.guardarUsuariosEnLocalStorage(usuarios);
             UsuariosModule.guardarUsuarioEnSessionStorage(usuarioActual);
           } else {
             usuario.carrito = usuario.carrito.filter(favId => favId !== producto.id);
             usuarioActual.carrito = usuarioActual.carrito.filter(favId => favId !== producto.id);
             botonCar.textContent = "Agregar a carrito";
 
-            UsuariosModule.guardarUsuarioRecordadoLocalStorage(usuarios);
+            UsuariosModule.guardarUsuariosEnLocalStorage(usuarios);
             UsuariosModule.guardarUsuarioEnSessionStorage(usuarioActual);
           }
         });
