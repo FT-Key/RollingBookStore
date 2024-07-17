@@ -2,6 +2,7 @@ import * as RutasProtegidassModule from "./rutasProtegidas.js";
 import * as UsuariosModule from "./manejadorUsuarios.js";
 import * as NavbarModule from "./manejadorNavbar.js";
 import * as FooterModule from "./footer.js";
+import * as LibrosModule from "./manejadorLibros.js";
 
 RutasProtegidassModule.protegerRuta(true, true, true);
 NavbarModule.inicializarNavbar();
@@ -369,7 +370,7 @@ export function agregarUsuarioNuevo() {
         1,
         "Admin123",
         "admin123@email.com",
-        "Abc123",
+        "Abcd123",
         "admin",
         true,
         false,
