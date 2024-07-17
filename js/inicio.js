@@ -90,9 +90,6 @@ export function generarCards(palabraClave = '') {
     });
   }
 
-  console.log(UsuariosModule.recuperarUsuarioDeSessionStorage().role);
-  console.log(document.querySelector('btn-nuevo'));
-
   if (UsuariosModule.recuperarUsuarioDeSessionStorage().role == "admin" && !document.querySelector('.btn-nuevo')) {
     const divBtnNuevo = document.createElement("div");
     divBtnNuevo.classList.add('div-btn-nuevo', 'd-flex', 'justify-content-start', 'w-100', 'ps-5');
