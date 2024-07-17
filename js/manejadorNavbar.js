@@ -248,7 +248,7 @@ export function agregarNavbar() {
         <!-- NAVBAR -->
         <nav class="navbar navbar-expand-md navbar-dark bg-navbar border-body" id="navbar">
             <div class="container-fluid">
-                <a class="navbar-brand" href="${(window.location.pathname === "/index.html" || window.location.pathname === "/") ? "#" : "../index.html"}">Navbar</a>
+                <a class="navbar-brand" href="${(window.location.pathname === "/index.html" || window.location.pathname === "/") ? "#" : "../index.html"}"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -260,9 +260,22 @@ export function agregarNavbar() {
             </div>
         </nav>
         <!-- NAVBAR END -->
-    `
+    `  
 
   header.insertAdjacentHTML('afterbegin', estructuraNavbar);
+
+  const navBrand = document.querySelector('.navbar-brand');
+
+  const logo = document.createElement('img');
+  if (location.pathname == "/" || location.pathname == "index.html") {
+    logo.src = "images/Logo.png";
+  } else {
+    logo.src = "../images/Logo.png";
+
+  }
+  
+  logo.style.height = "32px";
+  navBrand.appendChild(logo);
 }
 
 function cambiarVistaEstilo() {
@@ -280,7 +293,7 @@ function cambiarVistaEstilo() {
   const item = cambiarVistaElement.querySelector('.nav-link.text-nowrap');
 
   // Aplicar estilos al elemento encontrado
-  if (cambiarVistaElement) {
+  if (cambiarVistaElement ) {
     item.style.color = "white";
     cambiarVistaElement.style.backgroundColor = "rgba(16, 106, 16, 0.8)";
     cambiarVistaElement.style.borderRadius = "10px";
@@ -292,7 +305,9 @@ export function inicializarNavbar() {
 
   let usuario = UsuariosModule.recuperarUsuarioDeSessionStorage() || null;
   let vistaMiembro = JSON.parse(sessionStorage.getItem('vistaMiembro')) || false;
-  console.log("VistaMiembro: ", vistaMiembro);
+  if (usuario && usuario.role == "admin") {
+    vistaMiembro = false;
+  }
 
   const cerrarSesion = new NavbarLinkButton("Cerrar Sesión", function () {
     UsuariosModule.eliminarUsuarioDeSessionStorage();
@@ -312,13 +327,13 @@ export function inicializarNavbar() {
     UsuariosModule.guardarUsuarioEnSessionStorage(usuario);
     vistaMiembro = !vistaMiembro;
     sessionStorage.setItem('vistaMiembro', JSON.stringify(vistaMiembro));
-    history.replaceState(null, document.title, window.location.pathname); // Limpiar parámetros de búsqueda
     location.reload()
   });
 
   const favoritos = new NavbarLink("Favoritos", "pages/favoritos.html");
   const carrito = new NavbarLink("Carrito", "pages/carrito.html");
-  const esInicio = window.location.pathname === "/index.html" || window.location.pathname === "/";
+  const catalogo = new NavbarLink("Catálogo", "pages/inicio.html");
+  const esIndex = window.location.pathname === "/index.html" || window.location.pathname === "/";
 
   switch (true) {
     case usuario === null:
@@ -326,7 +341,7 @@ export function inicializarNavbar() {
       let iniSes;
       let reg;
 
-      if (!esInicio) {
+      if (!esIndex) {
         iniSes = "../pages/inicioSesion.html";
         reg = "../pages/registro.html";
         agregarSearchNavbar();
@@ -345,12 +360,13 @@ export function inicializarNavbar() {
 
       agregarElementoNavbar(favoritos);
       agregarElementoNavbar(carrito);
+      agregarElementoNavbar(catalogo);
       if (usuario.role === "miembroTest") {
         agregarElementoNavbar(cambiarVista);
         cambiarVistaEstilo();
       }
       agregarElementoNavbar(cerrarSesion);
-      if (!esInicio) {
+      if (!esIndex) {
         agregarSearchNavbar();
       }
 
@@ -359,12 +375,11 @@ export function inicializarNavbar() {
     case usuario.role === "admin":
 
       const usuarios = new NavbarLink("Usuarios", "pages/adminUsuarios.html");
-      const catalogo = new NavbarLink("Catalogo", "pages/adminCatalogo.html");
       agregarElementoNavbar(usuarios);
       agregarElementoNavbar(catalogo);
       agregarElementoNavbar(cambiarVista);
       agregarElementoNavbar(cerrarSesion);
-      if (!esInicio) {
+      if (!esIndex) {
         agregarSearchNavbar();
       }
       break;
@@ -374,7 +389,7 @@ export function inicializarNavbar() {
       break;
   }
 
-  if (window.location.pathname !== "/pages/inicio.html") {
+  if (window.location.pathname !== "/pages/inicio.html" && !esIndex) {
     const botonSearch = document.querySelector('#botonBusquedaNavbar');
 
     botonSearch.addEventListener('click', function (event) {
@@ -385,6 +400,9 @@ export function inicializarNavbar() {
 
       location.href = "/pages/inicio.html?palabraClave=" + encodeURIComponent(palabraClave);
     });
+  } else if (esIndex) {
+    const navbar = document.querySelector('.navbar .container-fluid .collapse ul');
+    navbar.classList.add('ms-auto');
   }
 
 }

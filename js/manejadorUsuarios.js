@@ -185,16 +185,14 @@ export function decryptId(encryptedId, key) {
 
 // Función para guardar el ID encriptado en el localStorage
 export function guardarUsuarioRecordadoLocalStorage(id) {
-    const encryptedId = encryptId(id, 'key123');
-    localStorage.setItem('usuarioRecordado', encryptedId);
+    localStorage.setItem('usuarioRecordado', id);
 }
 
 // Función para recuperar y desencriptar el ID del localStorage
 export function recuperarUsuarioRecordadoLocalStorage() {
-    const encryptedId = localStorage.getItem('usuarioRecordado');
-    if (encryptedId) {
-        const decryptedId = decryptId(encryptedId, 'key123');
-        return parseInt(decryptedId, 10); // Parseamos a entero base 10
+    const idUsuario = localStorage.getItem('usuarioRecordado');
+    if (idUsuario) {
+        return parseInt(idUsuario, 10); // Parseamos a entero base 10
     }
     return null;
 }

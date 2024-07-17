@@ -1,0 +1,26 @@
+@import url(./variables.css);
+
+main {
+    flex: 1;
+
+    .msjError {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        h1 {
+            -webkit-text-stroke: 2px var(--color-4);
+            font-size: 5rem;
+        }
+
+        h2 {
+            -webkit-text-stroke: 1px var(--color-4);
+            font-size: 3rem;
+        }
+    }
+}
