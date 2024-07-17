@@ -77,9 +77,23 @@ export function generarCards(palabraClave = '') {
       precios[index].textContent = `$${libro.precio.toFixed(2)}`;
       enlaces[index].setAttribute("data-id", libro.id);
     });
+
+    // Función para añadir event listeners a los botones
+    const botonesDetalle = document.querySelectorAll(".btn-card");
+    botonesDetalle.forEach((boton) => {
+      boton.addEventListener("click", (event) => {
+        event.preventDefault(); // Evitar que el enlace navegue automáticamente
+        const idLibro = boton.getAttribute("data-id");
+        // Redirigir a detalleLibro.html con el ID del libro
+        window.location.href = `./detalleLibro.html?id=${idLibro}`;
+      });
+    });
   }
 
-  if (UsuariosModule.recuperarUsuarioDeSessionStorage().role == "admin") {
+  console.log(UsuariosModule.recuperarUsuarioDeSessionStorage().role);
+  console.log(document.querySelector('btn-nuevo'));
+
+  if (UsuariosModule.recuperarUsuarioDeSessionStorage().role == "admin" && !document.querySelector('.btn-nuevo')) {
     const divBtnNuevo = document.createElement("div");
     divBtnNuevo.classList.add('div-btn-nuevo', 'd-flex', 'justify-content-start', 'w-100', 'ps-5');
     const btnNuevo = document.createElement("button");
@@ -102,18 +116,7 @@ export function generarCards(palabraClave = '') {
 document.addEventListener("DOMContentLoaded", () => {
   // Redimensionar el canvas
   resizeCanvas();
-  // Función para añadir event listeners a los botones
-  const agregarEventoABotonesVerDetalle = () => {
-    const botonesDetalle = document.querySelectorAll(".btn-card");
-    botonesDetalle.forEach((boton) => {
-      boton.addEventListener("click", (event) => {
-        event.preventDefault(); // Evitar que el enlace navegue automáticamente
-        const idLibro = boton.getAttribute("data-id");
-        // Redirigir a detalleLibro.html con el ID del libro
-        window.location.href = `./detalleLibro.html?id=${idLibro}`;
-      });
-    });
-  };
+
   const agregarEventoABotonBusqueda = () => {
     const botonSearch = document.querySelector('#botonBusquedaNavbar');
 
@@ -140,7 +143,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   agregarEventoABotonBusqueda();
-  agregarEventoABotonesVerDetalle();
 });
 
 function generarDestacados() {
