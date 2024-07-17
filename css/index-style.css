@@ -1,0 +1,49 @@
+@import url(./variables.css);
+
+body main {
+    background-image: url('https://i.pinimg.com/originals/1f/6a/bf/1f6abf1e3bcae48eed810c398b712ad4.jpg');
+    background-size: cover;
+    /* Ajusta el tamaño de la imagen para cubrir completamente el contenedor */
+    background-position: center;
+    /* Centra la imagen horizontal y verticalmente */
+    background-repeat: no-repeat;
+    /* Evita que la imagen se repita */
+}
+
+.container-bienvenida {
+    color: black;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .div-msj {
+        max-width: 60%;
+        background: var(--color-2);
+        border-radius: 20px;
+        padding: 10px;
+        border: solid 2px black;
+
+        h1 {
+            text-align: center;
+            width: 100%;
+            border-radius: 10px;
+
+        }
+
+        p {
+            text-align: center;
+            width: 100%;
+            border-radius: 10px;
+        }
+    }
+
+}
+
+.font {
+    font-family: "Rowdies", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
