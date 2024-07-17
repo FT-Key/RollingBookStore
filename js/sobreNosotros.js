@@ -7,8 +7,12 @@ NavbarModule.inicializarNavbar();
 FooterModule.agregarFooter();
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Manejar el evento click del botón de Iniciar Sesión
+  // Manejar el evento click de los botones
   document.querySelector(".back-btn").addEventListener("click", () => {
     window.history.back();
+  });
+
+  document.querySelector(".contact-btn").addEventListener("click", () => {
+    location.href = "contacto.html"
   });
 });
