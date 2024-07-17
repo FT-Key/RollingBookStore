@@ -50,7 +50,6 @@ export function comprobarUsuarioRecordado() {
 
     if (!UsuariosModule.recuperarUsuarioDeSessionStorage()) {
         const idUsuarioRecordado = UsuariosModule.recuperarUsuarioRecordadoLocalStorage();
-        console.log(idUsuarioRecordado)
 
         if (idUsuarioRecordado) {
             const usuarios = UsuariosModule.recuperarUsuariosDeLocalStorage();

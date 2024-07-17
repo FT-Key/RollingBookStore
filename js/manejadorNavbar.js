@@ -305,7 +305,7 @@ export function inicializarNavbar() {
 
   let usuario = UsuariosModule.recuperarUsuarioDeSessionStorage() || null;
   let vistaMiembro = JSON.parse(sessionStorage.getItem('vistaMiembro')) || false;
-  if (usuario.role == "admin") {
+  if (usuario && usuario.role == "admin") {
     vistaMiembro = false;
   }
 
