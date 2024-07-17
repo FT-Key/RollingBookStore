@@ -248,7 +248,7 @@ export function agregarNavbar() {
         <!-- NAVBAR -->
         <nav class="navbar navbar-expand-md navbar-dark bg-navbar border-body" id="navbar">
             <div class="container-fluid">
-                <a class="navbar-brand" href="${(window.location.pathname === "/index.html" || window.location.pathname === "/") ? "#" : "../index.html"}">Navbar</a>
+                <a class="navbar-brand" href="${(window.location.pathname === "/index.html" || window.location.pathname === "/") ? "#" : "../index.html"}"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -260,9 +260,23 @@ export function agregarNavbar() {
             </div>
         </nav>
         <!-- NAVBAR END -->
-    `
+    `  
 
   header.insertAdjacentHTML('afterbegin', estructuraNavbar);
+
+  const navBrand = document.querySelector('.navbar-brand');
+  console.log(navBrand);
+
+  const logo = document.createElement('img');
+  if (location.pathname == "/" || location.pathname == "index.html") {
+    logo.src = "images/Logo.png";
+  } else {
+    logo.src = "../images/Logo.png";
+
+  }
+  
+  logo.style.height = "32px";
+  navBrand.appendChild(logo);
 }
 
 function cambiarVistaEstilo() {
@@ -385,7 +399,7 @@ export function inicializarNavbar() {
 
       location.href = "/pages/inicio.html?palabraClave=" + encodeURIComponent(palabraClave);
     });
-  } else if(esIndex){
+  } else if (esIndex) {
     const navbar = document.querySelector('.navbar .container-fluid .collapse ul');
     navbar.classList.add('ms-auto');
   }
