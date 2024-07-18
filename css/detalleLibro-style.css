@@ -1,6 +1,6 @@
 @import url('./variables.css');
 
-.container-principal{
+.container-principal {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,7 +10,7 @@
 .container-producto {
     display: flex;
     flex-direction: column;
-    justify-content:space-between;
+    justify-content: space-between;
     padding: 20px;
     border-radius: 10px;
     width: 100%;
@@ -31,22 +31,54 @@
     text-align: center;
     margin-top: 20px;
     width: 100%;
+
+    * {
+        width: 100%;
+    }
 }
 
 .producto-titulo {
     margin-bottom: 10px;
+    font-size: 3rem;
 }
 
 .producto-descripcion {
-    font-size: 16px;
+    font-size: 2rem;
     margin-bottom: 20px;
+    min-width: 75%;
+    width: 100%;
 }
 
 .producto-precio {
+    font-size: 2rem;
     font-weight: bold;
     -webkit-text-stroke: .75px black;
     color: var(--color-dinero);
     margin-bottom: 20px;
+}
+
+.producto-autor, .producto-isbn, .producto-editorial, .producto-fecha-publicacion, .producto-paginas, .producto-genero, .producto-idioma, .producto-categorias, .producto-stock {
+    font-size: 1.5rem;
+}
+
+@media screen and (min-width: 768px) {
+
+    .container-img {
+        width: 50% !important;
+    }
+
+    .container-producto {
+        flex-direction: row;
+    }
+
+    .producto-info {
+        width: 50% !important;
+        text-align: left;
+
+        * {
+            width: initial;
+        }
+    }
 }
 
 .botones {
@@ -82,7 +114,8 @@
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
 
-.form-ctrl.is-invalid, .was-validated .form-control:invalid {
+.form-ctrl.is-invalid,
+.was-validated .form-control:invalid {
     border-color: var(--bs-form-invalid-border-color);
     padding-right: calc(1.5em + .75rem);
     background-repeat: no-repeat;
@@ -91,17 +124,12 @@
     background-image: url(https://static.vecteezy.com/system/resources/thumbnails/017/172/388/small_2x/warning-message-concept-represented-by-exclamation-mark-icon-exclamation-symbol-in-circle-png.png);
 }
 
-.producto-descripcion{
-    min-width: 75%;
-    width: 100%;
-}
-
-@media screen and (min-width: 768px) {
-    .container-producto{
-        flex-direction: row;
-    }
-    
-    .producto-info {
-        width: 50%;
-    }
+.form-ctrl.is-valid,
+.was-validated .form-control:valid {
+    border-color: var(--bs-form-valid-border-color);
+    padding-right: calc(1.5em + .75rem);
+    background-image: url(https://cdn.pixabay.com/photo/2016/03/31/14/37/check-mark-1292787_640.png);
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem);
 }
