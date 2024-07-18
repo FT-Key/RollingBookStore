@@ -19,7 +19,7 @@ function tamañoMain() {
     const anchoMain = tamañoBody - (tamañoFooter + tamañoHeader);
 
     // Asignamos el ancho calculado al main
-    main.style.height = anchoMain + "px";
+    main.style.height = 400 >= anchoMain ? "400px" : anchoMain + "px";
 }
 
 function bienvenidaIndex() {

@@ -67,19 +67,17 @@ function inicializar() {
                 button.textContent = "Cancelar";
                 button.removeEventListener('click', eventoBoton);
                 button.addEventListener('click', cancelarEvento);
+            } else if (indexParaCancelar !== -1) {
+                button.classList.add('disabled');
             }
         });
+
     }
 
     function eventoBoton(e) {
         const index = Array.from(btnDestacados).indexOf(e.currentTarget);
         generarCards();
         destacadoACambiar = index;
-        btnDestacados.forEach((button, btnIndex) => {
-            if (btnIndex !== index) {
-                button.classList.add('disabled');
-            }
-        });
         actualizarBotones(index);
     }
 
@@ -93,7 +91,6 @@ function inicializar() {
     });
 
     function generarCards() {
-
         const libros = librosModule.recuperarLibrosDeLocalStorage();
 
         // Container Cards
