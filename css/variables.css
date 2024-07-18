@@ -8,6 +8,20 @@
     --color-5: #817E49;
     --color-6: #CECA69;
 
-    --color-dinero: #429945;
+    --color-8: #2A66A6; /* Ajustado a un azul más oscuro y desaturado */
+    --color-8-dark: #204d79; /* Borde más oscuro */
+    --color-9: #19457A; /* Azul oscuro ajustado */
+    --color-9-dark: #12335a; /* Borde más oscuro */
 
+    --color-10: #3D8B41; /* Verde adaptado a la paleta */
+    --color-10-dark: #2D6630; /* Borde más oscuro */
+    --color-11: #2E6D30; /* Verde oscuro ajustado */
+    --color-11-dark: #224e23; /* Borde más oscuro */
+
+    --color-12: #A83B3B; /* Rojo de peligro ajustado */
+    --color-12-dark: #7D2D2D; /* Borde más oscuro */
+    --color-13: #882A2A; /* Rojo oscuro ajustado */
+    --color-13-dark: #661F1F; /* Borde más oscuro */
+
+    --color-dinero: #429945; /* Sin cambios */
 }
