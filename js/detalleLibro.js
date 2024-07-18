@@ -39,13 +39,13 @@ function inicializar() {
     }
 
     containerProducto.innerHTML = `
-        <div class="d-flex flex-column w-50 align-items-center">
+        <div class="container-img d-flex flex-column align-items-center">
           <img class="producto-img" src="" alt="...">
         </div>
-        <div class="producto-info w-50 align-items-start">
+        <div class="producto-info align-items-start">
             <h2 class="producto-titulo"></h2>
             <p class="producto-descripcion"></p>
-            <h4 class="producto-precio fs-4"></h4>
+            <h4 class="producto-precio"></h4>
             <p class="producto-autor"><strong>Autor:</strong> <span></span></p>
             <p class="producto-isbn"><strong>ISBN:</strong> <span></span></p>
             <p class="producto-editorial"><strong>Editorial:</strong> <span></span></p>

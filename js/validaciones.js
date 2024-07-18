@@ -41,7 +41,7 @@ export function validarLibroDescripcion(cadena) {
 }
 
 export function validarLibroAutorGeneroIdiomaEditorial(cadena) {
-  const regex = /^[A-Za-zÁÉÍÓÚÑÜáéíóúñü\s,'&-]+$/;
+  const regex = /^[A-Za-zÁÉÍÓÚÑÜáéíóúñü\s,'&.-]+$/;
   return regex.test(cadena);
 }
 
@@ -75,7 +75,9 @@ export function validarLibroImagenURL(cadena) {
   const regexURL = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp))$/i;
   // Expresión regular para rutas locales
   const regexLocal = /^(\.\/|\.\.\/).*\/.*\.(?:png|jpg|jpeg|gif|webp)$/i;
+  // Expresión regular para URLs de via.placeholder.com con tamaños entre 100 y 5000
+  const regexPlaceholder = /^https:\/\/via\.placeholder\.com\/([1-9]\d{2,3}|10000)x([1-9]\d{2,3}|10000)$/;
 
-  // Comprobar si la cadena cumple con alguna de las dos expresiones regulares
-  return regexURL.test(cadena) || regexLocal.test(cadena);
+  // Comprobar si la cadena cumple con alguna de las tres expresiones regulares
+  return regexURL.test(cadena) || regexLocal.test(cadena) || regexPlaceholder.test(cadena);
 }

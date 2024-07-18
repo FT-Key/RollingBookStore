@@ -24,7 +24,7 @@ export function agregarFooter() {
                 <a href="${hrefError}"><i class="fab fa-instagram"></i> Instagram</a>
               </div>
             </div>
-            <div class="mt-3">
+            <div>
               <p>&copy; 2024 RollingBookStore. Todos los derechos reservados.</p>
             </div>
           </div>
