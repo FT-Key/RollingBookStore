@@ -274,7 +274,7 @@ export function agregarNavbar() {
 
   }
   
-  logo.style.height = "32px";
+  logo.style.height = "40px";
   navBrand.appendChild(logo);
 }
 

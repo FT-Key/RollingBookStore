@@ -24,7 +24,7 @@ function inicializar() {
         const containerProducto = document.querySelector("#container-producto");
 
         containerProducto.innerHTML = `
-            <div class="d-flex flex-column gap-3 w-50 align-items-center">
+            <div class="container-img d-flex flex-column gap-3 align-items-center">
                 <img class="producto-img img-fluid" src="" alt="...">
                 <input type="text" class="producto-img-url w-75 form-ctrl" placeholder="URL de la imagen">
             </div>
@@ -53,6 +53,7 @@ function inicializar() {
         `;
 
         const img = containerProducto.querySelector(".producto-img");
+        const imgURL = containerProducto.querySelector(".producto-img-url");
         const tituloInput = containerProducto.querySelector(".producto-titulo-input");
         const descripcion = containerProducto.querySelector(".producto-descripcion");
         const precio = containerProducto.querySelector(".producto-precio input");
@@ -65,8 +66,93 @@ function inicializar() {
         const idioma = containerProducto.querySelector(".producto-idioma input");
         const categorias = containerProducto.querySelector(".producto-categorias input");
         const stock = containerProducto.querySelector(".producto-stock input");
-        const imgURL = containerProducto.querySelector(".producto-img-url");
         const disponibleSelect = containerProducto.querySelector("#disponible");
+
+        const arrayInputs = [imgURL, tituloInput, descripcion, precio, autor, isbn, editorial, fechaPublicacion, paginas, genero, idioma, categorias, stock];
+
+        function validarInputsError() {
+
+            function setValid(elemento) {
+                elemento.classList.remove("is-invalid");
+                elemento.classList.add("is-valid");
+            }
+
+            function setInvalid(elemento) {
+                elemento.classList.remove("is-valid");
+                elemento.classList.add("is-invalid");
+            }
+
+            arrayInputs.forEach(elemento => {
+                setValid(elemento);
+            });
+
+            let error = true;
+
+            switch (true) {
+
+                case !ValidacionesModule.validarLibroTitulo(tituloInput.value):
+                    setInvalid(tituloInput);
+                    break;
+
+                case !ValidacionesModule.validarLibroDescripcion(descripcion.value):
+                    setInvalid(descripcion);
+                    break;
+
+                case !ValidacionesModule.validarLibroPrecio(precio.value):
+                    setInvalid(precio);
+                    break;
+
+                case !ValidacionesModule.validarLibroAutorGeneroIdiomaEditorial(autor.value):
+                    setInvalid(autor);
+                    break;
+
+                case !ValidacionesModule.validarLibroAutorGeneroIdiomaEditorial(autor.value):
+                    setInvalid(autor);
+                    break;
+
+                case !ValidacionesModule.validarLibroISBN(isbn.value):
+                    setInvalid(isbn);
+                    break;
+
+                case !ValidacionesModule.validarLibroAutorGeneroIdiomaEditorial(editorial.value):
+                    setInvalid(editorial);
+                    break;
+
+                case !ValidacionesModule.validarLibroFecha(fechaPublicacion.value):
+                    setInvalid(fechaPublicacion);
+                    break;
+
+                case !ValidacionesModule.validarLibroPaginasStock(paginas.value):
+                    setInvalid(paginas);
+                    break;
+
+                case !ValidacionesModule.validarLibroAutorGeneroIdiomaEditorial(genero.value):
+                    setInvalid(genero);
+                    break;
+
+                case !ValidacionesModule.validarLibroAutorGeneroIdiomaEditorial(idioma.value):
+                    setInvalid(idioma);
+                    break;
+
+                case !ValidacionesModule.validarLibroCategorias(categorias.value):
+                    setInvalid(categorias);
+                    break;
+
+                case !ValidacionesModule.validarLibroPaginasStock(stock.value):
+                    setInvalid(stock);
+                    break;
+
+                case !ValidacionesModule.validarLibroImagenURL(imgURL.value):
+                    setInvalid(imgURL);
+                    break;
+
+                default:
+                    error = false;
+                    break;
+            }
+
+            return error;
+        }
 
         if (producto) {
 
@@ -91,94 +177,8 @@ function inicializar() {
 
             botonGuardar.addEventListener('click', () => {
 
-                function validarInputsError() {
-
-                    let error = true;
-
-                    switch (true) {
-
-                        case !ValidacionesModule.validarLibroTitulo(tituloInput.value):
-                            console.log("Entra aqui");
-                            tituloInput.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroDescripcion(descripcion.value):
-                            console.log("Entra aqui");
-                            descripcion.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroPrecio(precio.value):
-                            console.log("Entra aqui");
-                            precio.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroAutorGeneroIdiomaEditorial(autor.value):
-                            console.log("Entra aqui");
-                            autor.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroAutorGeneroIdiomaEditorial(autor.value):
-                            console.log("Entra aqui");
-                            autor.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroISBN(isbn.value):
-                            console.log(isbn.value);
-                            console.log(isbn);
-                            console.log("Entra aqui");
-                            isbn.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroAutorGeneroIdiomaEditorial(editorial.value):
-                            console.log("Entra aqui");
-                            editorial.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroFecha(fechaPublicacion.value):
-                            console.log("Entra aqui");
-                            fechaPublicacion.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroPaginasStock(paginas.value):
-                            console.log("Entra aqui");
-                            paginas.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroAutorGeneroIdiomaEditorial(genero.value):
-                            console.log("Entra aqui");
-                            genero.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroAutorGeneroIdiomaEditorial(idioma.value):
-                            console.log("Entra aqui");
-                            idioma.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroCategorias(categorias.value):
-                            console.log("Entra aqui");
-                            categorias.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroPaginasStock(stock.value):
-                            console.log("Entra aqui");
-                            stock.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroImagenURL(imgURL.value):
-                            console.log("Entra aqui");
-                            imgURL.classList.add('is-invalid');
-                            break;
-
-                        default:
-                            error = false;
-                            break;
-                    }
-
-                    return error;
-                }
-
                 if (!validarInputsError()) {
-                                       
+
                     producto.imagenURL = img.src;
                     producto.titulo = tituloInput.value;
                     producto.descripcion = descripcion.value;
@@ -194,12 +194,10 @@ function inicializar() {
                     producto.stock = parseInt(stock.value);
                     producto.disponible = disponibleSelect.value === "true";
 
-                    const nuevoLibro = new librosModule.Libro();
-
                     // Guardar los cambios en localStorage
                     librosModule.guardarLibrosEnLocalStorage(productos);
 
-                    inicializar();
+                    location.href = `detalleLibro.html?id=${id}`
                 }
             });
 
@@ -245,95 +243,9 @@ function inicializar() {
 
             botonGuardar.addEventListener('click', () => {
 
-                function validarInputsError() {
-
-                    let error = true;
-
-                    switch (true) {
-
-                        case !ValidacionesModule.validarLibroTitulo(tituloInput.value):
-                            console.log("Entra aqui");
-                            tituloInput.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroDescripcion(descripcion.value):
-                            console.log("Entra aqui");
-                            descripcion.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroPrecio(precio.value):
-                            console.log("Entra aqui");
-                            precio.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroAutorGeneroIdiomaEditorial(autor.value):
-                            console.log("Entra aqui");
-                            autor.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroAutorGeneroIdiomaEditorial(autor.value):
-                            console.log("Entra aqui");
-                            autor.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroISBN(isbn.value):
-                            console.log(isbn.value);
-                            console.log(isbn);
-                            console.log("Entra aqui");
-                            isbn.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroAutorGeneroIdiomaEditorial(editorial.value):
-                            console.log("Entra aqui");
-                            editorial.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroFecha(fechaPublicacion.value):
-                            console.log("Entra aqui");
-                            fechaPublicacion.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroPaginasStock(paginas.value):
-                            console.log("Entra aqui");
-                            paginas.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroAutorGeneroIdiomaEditorial(genero.value):
-                            console.log("Entra aqui");
-                            genero.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroAutorGeneroIdiomaEditorial(idioma.value):
-                            console.log("Entra aqui");
-                            idioma.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroCategorias(categorias.value):
-                            console.log("Entra aqui");
-                            categorias.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroPaginasStock(stock.value):
-                            console.log("Entra aqui");
-                            stock.classList.add('is-invalid');
-                            break;
-
-                        case !ValidacionesModule.validarLibroImagenURL(imgURL.value):
-                            console.log("Entra aqui");
-                            imgURL.classList.add('is-invalid');
-                            break;
-
-                        default:
-                            error = false;
-                            break;
-                    }
-
-                    return error;
-                }
-
                 if (!validarInputsError()) {
 
-                    const nuevaId = productos.length ? producto[productos.length - 1].id + 1 : 1;
+                    const nuevaId = productos.length ? productos[productos.length - 1].id + 1 : 1;
                     const nuevoTitulo = tituloInput.value;
                     const nuevoAutor = autor.value;
                     const nuevoIsbn = isbn.value;
@@ -372,7 +284,7 @@ function inicializar() {
                     // Guardar los cambios en localStorage
                     librosModule.guardarLibrosEnLocalStorage(productos);
 
-                    location.href = `pages/editarLibro.html?id=${nuevaId}`
+                    location.href = `detalleLibro.html?id=${nuevaId}`
                 }
             });
 

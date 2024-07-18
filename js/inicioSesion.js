@@ -86,7 +86,7 @@ function iniciarSesion(event) {
   } else if (!validarContraseniaUsuario(contraseñaUsuario.value)) {
     boundSetError(
       1,
-      "La contraseña debe contener\nentre 3 y 30 carácteres alfanuméricos\ncon al menos una mayúscula y un número"
+      "Formato incorrecto."
     );
   } else {
     setValid(contraseñaUsuario);
@@ -107,9 +107,13 @@ function iniciarSesion(event) {
   }
 
   const noExisteErrorNombre = patternIndications[0].getAttribute("title").trim() === "";
+  const noExisteErrorContrasenia = patternIndications[1].getAttribute("title").trim() === "";
 
   if (!usuario && noExisteErrorNombre) {
-    boundSetError(0, "Usuario inexistente.");
+    if (!noExisteErrorContrasenia) {
+    } else {
+      boundSetError(0, "Usuario inexistente.");
+    }
     setInvalid(nombreUsuario);
     setInvalid(contraseñaUsuario);
   } else if (usuario && noExisteErrorNombre) {
